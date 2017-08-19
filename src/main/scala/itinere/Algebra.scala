@@ -137,20 +137,16 @@ trait HttpResponse {
   type HttpResponseEntity[A]
   type HttpResponse[A]
 
+  def emptyResponseHeaders: HttpResponseHeaders[HNil]
+  def emptyResponse: HttpResponseEntity[HNil]
+  def cnil: HttpResponse[CNil]
+  def jsonResponse[A : JsonCodec]: HttpResponseEntity[A]
+  def response[A, B](statusCode: Int, headers: HttpResponseHeaders[A] = emptyResponseHeaders, entity: HttpResponseEntity[B] = emptyResponse)(implicit T: Tupler[A, B]): HttpResponse[T.Out]
+
   implicit val httpResponseResponseHeadersInvariantFunctor: InvariantFunctor[HttpResponseHeaders]
   implicit val httpResponseEntityInvariantFunctor: InvariantFunctor[HttpResponseEntity]
   implicit val httpResponseInvariantFunctor: InvariantFunctor[HttpResponse]
   implicit val httpResponseCocartesian: CoCartesian[HttpResponse]
-
-  def emptyResponseHeaders: HttpResponseHeaders[HNil]
-  def emptyResponse: HttpResponseEntity[HNil]
-
-  def cnil: HttpResponse[CNil]
-
-  def json[A]: HttpResponseEntity[A]
-
-  def response[A, B](statusCode: Int, headers: HttpResponseHeaders[A] = emptyResponseHeaders, entity: HttpResponseEntity[B] = emptyResponse)(implicit T: Tupler[A, B]): HttpResponse[T.Out]
-
 }
 
 trait HttpRequest extends Url {
@@ -158,29 +154,37 @@ trait HttpRequest extends Url {
   type HttpRequestEntity[A]
   type HttpRequest[A]
 
+  type HttpMethod
+
+  def GET: HttpMethod
+  def PUT: HttpMethod
+  def POST: HttpMethod
+  def DELETE: HttpMethod
+  def PATCH: HttpMethod
+
+  def emptyRequestHeaders: HttpRequestHeaders[HNil]
+  def emptyRequestEntity: HttpRequestEntity[HNil]
+  def jsonRequest[A : JsonCodec]: HttpRequestEntity[A]
+  def request[A, B, C, AB](method: HttpMethod, url: Url[A], headers: HttpRequestHeaders[B] = emptyRequestHeaders, entity: HttpRequestEntity[C] = emptyRequestEntity)
+                          (implicit T: Tupler.Aux[A, B, AB], TO: Tupler[AB, C]): HttpRequest[TO.Out]
+
   implicit val httpRequestHeadersInvariantFunctor: InvariantFunctor[HttpRequestHeaders]
   implicit val httpRequestEntityInvariantFunctor: InvariantFunctor[HttpRequestEntity]
   implicit val httpRequestInvariantFunctor: InvariantFunctor[HttpRequest]
-
-  def emptyRequestHeaders: HttpRequestHeaders[HNil]
-  def emptyRequest: HttpRequestEntity[HNil]
-
-  type HttpMethod
-
-  def Get: HttpMethod
-  def Put: HttpMethod
-  def Post: HttpMethod
-  def Delete: HttpMethod
-  def Patch: HttpMethod
-
-  def request[A, B, C, AB](method: HttpMethod, url: Url[A], headers: HttpRequestHeaders[B] = emptyRequestHeaders, entity: HttpRequestEntity[C] = emptyRequest)
-                          (implicit T: Tupler.Aux[A, B, AB], TO: Tupler[AB, C]): HttpRequest[TO.Out]
-
 }
 
 trait JsonCodec[A] {
   def encode(entity: A): String
   def decode(input: String): String Either A
+}
+
+object JsonCodec {
+  implicit val invariant = new InvariantFunctor[JsonCodec] {
+    override def imap[A, B](fa: JsonCodec[A])(f: (A) => B)(g: (B) => A): JsonCodec[B] = new JsonCodec[B] {
+      override def encode(entity: B): String = fa.encode(g(entity))
+      override def decode(input: String): Either[String, B] = fa.decode(input).map(f)
+    }
+  }
 }
 
 trait CoCartesian[F[_]] {

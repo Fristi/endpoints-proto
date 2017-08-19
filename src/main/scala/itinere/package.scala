@@ -1,4 +1,5 @@
 import shapeless._
+import shapeless.ops.hlist.Align
 
 package object itinere {
 

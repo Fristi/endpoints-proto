@@ -283,6 +283,9 @@
       </SbtProjectSettings>
     </option>
   </component>
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+  </component>
   <component name="libraryTable">
     <library name="SBT: com.chuusai:shapeless_2.12:2.3.2:jar">
       <CLASSES>
