@@ -5,7 +5,7 @@ case class User(name: String)
 
 case class ListUserRequest(kind: Option[String])
 
-sealed trait ListUserResponse
-final case class Success(users: List[User]) extends ListUserResponse
-final case class BadRequest(error: Error) extends ListUserResponse
-final case class NotFound(error: Error) extends ListUserResponse
+sealed trait DomainResponse[+A]
+final case class Success[A](users: A) extends DomainResponse[A]
+final case class BadRequest(error: Error) extends DomainResponse[Nothing]
+final case class NotFound(error: Error) extends DomainResponse[Nothing]

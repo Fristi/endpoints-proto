@@ -30,13 +30,13 @@ trait ArgonautJsonCodec extends WithJsonCodec with ArgonautShapeless {
 
 trait Test extends HttpEndpointAlgebra with HttpJsonAlgebra with ArgonautJsonCodec {
 
-  def listUsers: Endpoint[ListUserRequest, ListUserResponse] = endpoint(
+  def listUsers: Endpoint[ListUserRequest, DomainResponse[List[User]]] = endpoint(
     request(GET, path / "test" /? optQs[String]("kind")).as[ListUserRequest],
     (
       response(400, entity = jsonResponse[Error]).as[BadRequest] |
         (response(404, entity = jsonResponse[Error]).as[NotFound] |
-        (response(200, entity = jsonResponse[List[User]]).as[Success] | cnil))
-    ).as[ListUserResponse]
+        (response(200, entity = jsonResponse[List[User]]).as[Success[List[User]]] | cnil))
+    ).as[DomainResponse[List[User]]]
   )
 
 }
@@ -59,6 +59,12 @@ object ServerApp extends App {
   }
 
   val bindingFuture = Http().bindAndHandle(ServerImpl.routes, "localhost", 8080)
+
+
+}
+
+object ClientApp extends App {
+
 
 
 }

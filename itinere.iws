@@ -2,17 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="72deed5b-7f8e-4baf-a187-2cb22a9e7d28" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/scala/itinere/server/ServerJson.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.sbt" afterPath="$PROJECT_DIR$/build.sbt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/itinere.ipr" afterPath="$PROJECT_DIR$/itinere.ipr" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/itinere.iws" afterPath="$PROJECT_DIR$/itinere.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/itinere/Algebra.scala" afterPath="$PROJECT_DIR$/src/main/scala/itinere/Algebra.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/itinere/Client.scala" afterPath="$PROJECT_DIR$/src/main/scala/itinere/Client.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/itinere/Test.scala" afterPath="$PROJECT_DIR$/src/main/scala/itinere/Test.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/itinere/server/Server.scala" afterPath="$PROJECT_DIR$/src/main/scala/itinere/server/Server.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/itinere/server/ServerRequest.scala" afterPath="$PROJECT_DIR$/src/main/scala/itinere/server/ServerRequest.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/itinere/server/ServerResponse.scala" afterPath="$PROJECT_DIR$/src/main/scala/itinere/server/ServerResponse.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/itinere/server/package.scala" afterPath="$PROJECT_DIR$/src/main/scala/itinere/server/package.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/itinere/domain/Domain.scala" afterPath="$PROJECT_DIR$/src/main/scala/itinere/domain/Domain.scala" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -52,8 +44,8 @@
       <file leaf-file-name="Algebra.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/itinere/Algebra.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-8">
-              <caret line="146" column="7" lean-forward="false" selection-start-line="146" selection-start-column="7" selection-end-line="146" selection-end-column="7" />
+            <state relative-caret-position="139">
+              <caret line="31" column="7" lean-forward="false" selection-start-line="31" selection-start-column="7" selection-end-line="31" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -62,8 +54,8 @@
       <file leaf-file-name="Test.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/scala/itinere/Test.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="55" column="77" lean-forward="false" selection-start-line="55" selection-start-column="77" selection-end-line="55" selection-end-column="77" />
+            <state relative-caret-position="-80">
+              <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
               <folding>
                 <element signature="e#17#46#0" expanded="true" />
               </folding>
@@ -149,16 +141,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="build.sbt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/build.sbt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-463">
-              <caret line="11" column="71" lean-forward="false" selection-start-line="11" selection-start-column="71" selection-end-line="11" selection-end-column="71" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -200,7 +182,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/main/scala/itinere/Domain.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/itinere/domain/Domain.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/itinere/domain/test.sc" />
         <option value="$PROJECT_DIR$/src/main/scala/itinere/Tupler.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/itinere/Server.scala" />
@@ -214,6 +195,7 @@
         <option value="$PROJECT_DIR$/src/main/scala/itinere/server/ServerRequest.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/itinere/server/ServerResponse.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/itinere/server/ServerJson.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/itinere/domain/Domain.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/itinere/Test.scala" />
       </list>
     </option>
@@ -302,6 +284,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/scala/itinere" />
+    <property name="restartRequiresConfirmation" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -507,7 +490,14 @@
       <option name="project" value="LOCAL" />
       <updated>1503218666663</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Working server!">
+      <created>1503223671264</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1503223671264</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -552,7 +542,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="WIP" />
     <MESSAGE value="WIP server" />
-    <option name="LAST_COMMIT_MESSAGE" value="WIP server" />
+    <MESSAGE value="Working server!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Working server!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -670,16 +661,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="206">
           <caret line="82" column="90" lean-forward="false" selection-start-line="82" selection-start-column="87" selection-end-line="82" selection-end-column="90" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/itinere/domain/Domain.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="8" column="6" lean-forward="false" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
-          <caret line="9" column="6" lean-forward="false" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
-          <caret line="10" column="6" lean-forward="false" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
           <folding />
         </state>
       </provider>
@@ -890,22 +871,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/itinere/Algebra.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-8">
-          <caret line="146" column="7" lean-forward="false" selection-start-line="146" selection-start-column="7" selection-end-line="146" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/itinere/server/ServerJson.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="10" column="6" lean-forward="false" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/itinere/server/Server.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -936,10 +901,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/itinere/Algebra.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="139">
+          <caret line="31" column="7" lean-forward="false" selection-start-line="31" selection-start-column="7" selection-end-line="31" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/itinere/domain/Domain.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="70" lean-forward="false" selection-start-line="10" selection-start-column="70" selection-end-line="10" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/itinere/server/ServerJson.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="10" column="6" lean-forward="false" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/itinere/Test.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="55" column="77" lean-forward="false" selection-start-line="55" selection-start-column="77" selection-end-line="55" selection-end-column="77" />
+        <state relative-caret-position="-80">
+          <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
           <folding>
             <element signature="e#17#46#0" expanded="true" />
           </folding>
