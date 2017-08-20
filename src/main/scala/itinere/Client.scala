@@ -1,16 +1,15 @@
 package itinere
 
 import java.net.URLEncoder
+import java.nio.charset.StandardCharsets.UTF_8
 
 import akka.http.scaladsl.model
 import akka.http.scaladsl.model.{ContentTypes, HttpMethods, Uri, HttpEntity => Entity, HttpHeader => Header, HttpRequest => Req, HttpResponse => Resp}
+import akka.stream.Materializer
 import shapeless.{CNil, HNil}
 
-import scala.concurrent.{ExecutionContext, Future}
 import scala.concurrent.duration._
-import java.nio.charset.StandardCharsets.UTF_8
-
-import akka.stream.Materializer
+import scala.concurrent.{ExecutionContext, Future}
 
 case class Settings(
                      baseUri: Uri,
@@ -34,18 +33,28 @@ abstract class Client(val settings: Settings)(implicit val ec: ExecutionContext,
   }
 }
 
-trait ClientResponse extends HttpResponseAlgebra { self: Client =>
+trait ClientJson extends HttpJsonAlgebra {
+  self: Client with WithJsonCodec =>
+
+
+  override def jsonRequest[A: JsonCodec]: (A, model.HttpRequest) => model.HttpRequest = (entity, req) =>
+    req.withEntity(ContentTypes.`application/json`, implicitly[JsonCodec[A]].encode(entity))
+
+  override def jsonResponse[A: JsonCodec]: (model.HttpResponse) => Future[A] = model => for {
+    strictEntity <- model.entity.toStrict(2.seconds)
+    data = strictEntity.data.utf8String
+    result <- implicitly[JsonCodec[A]]
+      .decode(data)
+      .fold(x => Future.failed(new Throwable(x)), Future.successful)
+  } yield result
+}
+
+trait ClientResponse extends HttpResponseAlgebra {
+  self: Client =>
 
   override type HttpResponseHeaders[A] = Resp => A
   override type HttpResponseEntity[A] = Resp => Future[A]
   override type HttpResponse[A] = PartialFunction[(Resp, Int), Future[A]]
-
-  override def jsonResponse[A : JsonCodec]: (model.HttpResponse) => Future[A] = model => for {
-    strictEntity <- model.entity.toStrict(2.seconds)
-    result <- implicitly[JsonCodec[A]]
-      .decode(strictEntity.data.utf8String)
-      .fold(x => Future.failed(new Throwable(x)), Future.successful)
-  } yield result
 
 
   override def cnil: PartialFunction[(Resp, Int), Future[CNil]] = {
@@ -64,7 +73,7 @@ trait ClientResponse extends HttpResponseAlgebra { self: Client =>
 
   override def response[A, B](statusCode: Int, headers: (Resp) => A, entity: (Resp) => Future[B])
                              (implicit T: Tupler[A, B]): PartialFunction[(Resp, Int), Future[T.Out]] = {
-    case (resp, code) if code == statusCode =>
+    case (resp, status) if status == statusCode =>
       entity(resp).map(b => T(headers(resp), b))
   }
 
@@ -76,13 +85,14 @@ trait ClientResponse extends HttpResponseAlgebra { self: Client =>
   }
   override implicit val httpResponseInvariantFunctor: InvariantFunctor[HttpResponse] = new InvariantFunctor[HttpResponse] {
     override def imap[A, B](fa: PartialFunction[(Resp, Int), Future[A]])(f: (A) => B)(g: (B) => A): PartialFunction[(Resp, Int), Future[B]] = {
-      case (resp, code) => fa(resp -> code).map(f)
+      case (resp, code) if fa.isDefinedAt(resp -> code) => fa(resp -> code).map(f)
     }
   }
 }
 
-trait ClientRequest extends HttpRequestAlgebra with ClientUrls { self: Client =>
-  override type HttpRequestHeaders[A] =  (A, List[Header]) => List[Header]
+trait ClientRequest extends HttpRequestAlgebra with ClientUrls {
+  self: Client =>
+  override type HttpRequestHeaders[A] = (A, List[Header]) => List[Header]
   override type HttpRequestEntity[A] = (A, Req) => Req
   override type HttpRequest[A] = A => Future[Resp]
 
@@ -98,8 +108,6 @@ trait ClientRequest extends HttpRequestAlgebra with ClientUrls { self: Client =>
 
   override def PATCH: (model.HttpRequest) => model.HttpRequest = _.withMethod(HttpMethods.PATCH)
 
-  override def jsonRequest[A: JsonCodec]: (A, model.HttpRequest) => model.HttpRequest = (entity, req) =>
-    req.withEntity(ContentTypes.`application/json`, implicitly[JsonCodec[A]].encode(entity))
 
   lazy val emptyRequestHeaders: HttpRequestHeaders[HNil] = (_, req) => req
   lazy val emptyRequestEntity: HttpRequestEntity[HNil] = (_, req) => req
@@ -120,7 +128,7 @@ trait ClientRequest extends HttpRequestAlgebra with ClientUrls { self: Client =>
       val (ab, c) = tuplerABC.unapply(abc)
       val (a, b) = tuplerAB.unapply(ab)
       val uri =
-        if(self.settings.baseUri == Uri("/")) Uri(url.encode(a))
+        if (self.settings.baseUri == Uri("/")) Uri(url.encode(a))
         else Uri(s"${self.settings.baseUri.path}${url.encode(a)}")
 
       val request = method(entity(c, Req(uri = uri)))

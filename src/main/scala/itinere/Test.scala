@@ -2,13 +2,17 @@ package itinere
 
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
+import akka.http.scaladsl.model.{HttpRequest, HttpResponse, Uri}
 import akka.stream.ActorMaterializer
+import akka.stream.scaladsl.{Sink, Source}
 import argonaut.derive.{DerivedInstances, SingletonInstances}
 import argonaut.{CodecJson, DecodeJson, EncodeJson, Parse}
 import itinere.domain._
 import itinere.server.{Server, ServerJson}
 
-import scala.concurrent.Future
+import scala.concurrent.{Await, Future}
+import scala.concurrent.duration._
+
 
 trait ArgonautShapeless extends SingletonInstances with DerivedInstances
 
@@ -24,7 +28,7 @@ trait ArgonautJsonCodec extends WithJsonCodec with ArgonautShapeless {
     override def decode(input: String): Either[String, A] =
       Parse.parse(input)
         .right
-        .flatMap(json => implicitly[CodecJson[A]].decodeJson(json).fold[Either[String, A]]((err, _) => Left(err), Right.apply))
+        .flatMap(json => implicitly[CodecJson[A]].decodeJson(json).fold[Either[String, A]]((err, cursor) => Left(s"$err -> $cursor"), Right.apply))
   }
 }
 
@@ -54,7 +58,7 @@ object ServerApp extends App {
     val routes = listUsers.implementedByAsync {
       case r if r.kind.contains("notFound") => Future.successful(NotFound(Error("notFound")))
       case r if r.kind.contains("badRequest") => Future.successful(BadRequest(Error("badRequest")))
-      case _ => Future.successful(Success(List.empty))
+      case _ => Future.successful(Success(List(User("mark"), User("julien"))))
     }
   }
 
@@ -64,7 +68,30 @@ object ServerApp extends App {
 }
 
 object ClientApp extends App {
+  implicit val system = ActorSystem()
+  implicit val materializer = ActorMaterializer()
+  implicit val ec = system.dispatcher
+
+  val poolClientFlow = Http().cachedHostConnectionPool[Int]("localhost", 8080)
+
+  def pipeline(req: HttpRequest): Future[HttpResponse] =
+    Source.single(req -> 1).via(poolClientFlow)
+      .map(_._1.get)
+      .runWith(Sink.head)
 
 
+  val settings = Settings(
+    baseUri = Uri("/"),
+    toStrictTimeout = 2.seconds,
+    stringContentExtractor = _.data.utf8String,
+    requestExecutor = pipeline
+  )
+
+  object HttpClient extends Client(settings) with ClientJson with Test
+
+
+  println(Await.result(HttpClient.listUsers(ListUserRequest(Some("badRequest"))), 2.seconds))
+  println(Await.result(HttpClient.listUsers(ListUserRequest(Some("notFound"))), 2.seconds))
+  println(Await.result(HttpClient.listUsers(ListUserRequest(None)), 2.seconds))
 
 }
