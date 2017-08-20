@@ -2,7 +2,7 @@ package itinere
 
 import shapeless._
 
-trait Endpoints {
+trait EndpointAlgebra {
 
   type Request[A]
   type Response[A]
@@ -14,15 +14,12 @@ trait Endpoints {
 
 }
 
-trait HttpEndpoints extends Endpoints with HttpRequest with HttpResponse {
+trait HttpEndpointAlgebra extends EndpointAlgebra with HttpRequestAlgebra with HttpResponseAlgebra {
   type Request[A] = HttpRequest[A]
   type Response[A] = HttpResponse[A]
-
-
-
 }
 
-trait Url {
+trait UrlAlgebra {
 
   /** A query string carrying an `A` information */
   type QueryString[A]
@@ -132,7 +129,7 @@ trait Url {
   implicit val urlInvariantFunctor: InvariantFunctor[Url]
 }
 
-trait HttpResponse {
+trait HttpResponseAlgebra {
   type HttpResponseHeaders[A]
   type HttpResponseEntity[A]
   type HttpResponse[A]
@@ -149,7 +146,7 @@ trait HttpResponse {
   implicit val httpResponseCocartesian: CoCartesian[HttpResponse]
 }
 
-trait HttpRequest extends Url {
+trait HttpRequestAlgebra extends UrlAlgebra {
   type HttpRequestHeaders[A]
   type HttpRequestEntity[A]
   type HttpRequest[A]

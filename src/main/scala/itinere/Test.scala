@@ -4,7 +4,7 @@ import itinere.domain._
 
 
 
-trait Test extends HttpEndpoints {
+trait Test extends HttpEndpointAlgebra {
 
   implicit def codec[A] = new JsonCodec[A] {
     override def encode(entity: A): String = ???

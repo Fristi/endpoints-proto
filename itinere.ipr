@@ -264,6 +264,54 @@
   </component>
   <component name="ScalaCompilerConfiguration">
     <profile name="SBT 1" modules="itinere">
+      <option name="implicitConversions" value="true" />
+      <option name="higherKinds" value="true" />
+      <option name="existentials" value="true" />
+      <option name="macros" value="true" />
+      <option name="deprecationWarnings" value="true" />
+      <option name="uncheckedWarnings" value="true" />
+      <option name="featureWarnings" value="true" />
+      <option name="explainTypeErrors" value="true" />
+      <parameters>
+        <parameter value="-encoding" />
+        <parameter value="utf-8" />
+        <parameter value="-Xcheckinit" />
+        <parameter value="-Xfatal-warnings" />
+        <parameter value="-Xfuture" />
+        <parameter value="-Xlint:adapted-args" />
+        <parameter value="-Xlint:by-name-right-associative" />
+        <parameter value="-Xlint:constant" />
+        <parameter value="-Xlint:delayedinit-select" />
+        <parameter value="-Xlint:doc-detached" />
+        <parameter value="-Xlint:inaccessible" />
+        <parameter value="-Xlint:infer-any" />
+        <parameter value="-Xlint:missing-interpolator" />
+        <parameter value="-Xlint:nullary-override" />
+        <parameter value="-Xlint:nullary-unit" />
+        <parameter value="-Xlint:option-implicit" />
+        <parameter value="-Xlint:package-object-classes" />
+        <parameter value="-Xlint:poly-implicit-overload" />
+        <parameter value="-Xlint:private-shadow" />
+        <parameter value="-Xlint:stars-align" />
+        <parameter value="-Xlint:type-parameter-shadow" />
+        <parameter value="-Xlint:unsound-match" />
+        <parameter value="-Yno-adapted-args" />
+        <parameter value="-Ypartial-unification" />
+        <parameter value="-Ywarn-dead-code" />
+        <parameter value="-Ywarn-extra-implicit" />
+        <parameter value="-Ywarn-inaccessible" />
+        <parameter value="-Ywarn-infer-any" />
+        <parameter value="-Ywarn-nullary-override" />
+        <parameter value="-Ywarn-nullary-unit" />
+        <parameter value="-Ywarn-numeric-widen" />
+        <parameter value="-Ywarn-unused:implicits" />
+        <parameter value="-Ywarn-unused:imports" />
+        <parameter value="-Ywarn-unused:locals" />
+        <parameter value="-Ywarn-unused:params" />
+        <parameter value="-Ywarn-unused:patvars" />
+        <parameter value="-Ywarn-unused:privates" />
+        <parameter value="-Ywarn-value-discard" />
+      </parameters>
       <plugins>
         <plugin path="$USER_HOME$/.ivy2/cache/org.spire-math/kind-projector_2.12/jars/kind-projector_2.12-0.9.4.jar" />
       </plugins>

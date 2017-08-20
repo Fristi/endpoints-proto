@@ -34,7 +34,7 @@ abstract class Client(val settings: Settings)(implicit val ec: ExecutionContext,
   }
 }
 
-trait ClientResponse extends HttpResponse { self: Client =>
+trait ClientResponse extends HttpResponseAlgebra { self: Client =>
 
   override type HttpResponseHeaders[A] = Resp => A
   override type HttpResponseEntity[A] = Resp => Future[A]
@@ -54,12 +54,8 @@ trait ClientResponse extends HttpResponse { self: Client =>
   }
 
   override implicit val httpResponseCocartesian: CoCartesian[HttpResponse] = new CoCartesian[HttpResponse] {
-    override def sum[A, B](fa: HttpResponse[A], fb: HttpResponse[B]): HttpResponse[Either[A, B]] = {
-      val f1 = fa.andThen(_.map(Left.apply))
-      val f2 = fb.andThen(_.map(Right.apply))
-
-      f1 orElse f2
-    }
+    override def sum[A, B](fa: HttpResponse[A], fb: HttpResponse[B]): HttpResponse[Either[A, B]] =
+      fa.andThen(_.map(Left.apply)) orElse fb.andThen(_.map(Right.apply))
   }
 
   override def emptyResponseHeaders: (model.HttpResponse) => HNil = _ => HNil
@@ -85,7 +81,7 @@ trait ClientResponse extends HttpResponse { self: Client =>
   }
 }
 
-trait ClientRequest extends HttpRequest with ClientUrls { self: Client =>
+trait ClientRequest extends HttpRequestAlgebra with ClientUrls { self: Client =>
   override type HttpRequestHeaders[A] =  (A, List[Header]) => List[Header]
   override type HttpRequestEntity[A] = (A, Req) => Req
   override type HttpRequest[A] = A => Future[Resp]
@@ -135,7 +131,7 @@ trait ClientRequest extends HttpRequest with ClientUrls { self: Client =>
 }
 
 
-trait ClientUrls extends Url {
+trait ClientUrls extends UrlAlgebra {
 
   val utf8Name = UTF_8.name()
 
