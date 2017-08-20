@@ -344,6 +344,15 @@
         <root url="jar://$USER_HOME$/.ivy2/cache/com.chuusai/shapeless_2.12/srcs/shapeless_2.12-2.3.2-sources.jar!/" />
       </SOURCES>
     </library>
+    <library name="SBT: com.github.alexarchambault:argonaut-shapeless_6.2_2.12:1.2.0-M4:jar">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/com.github.alexarchambault/argonaut-shapeless_6.2_2.12/jars/argonaut-shapeless_6.2_2.12-1.2.0-M4.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/com.github.alexarchambault/argonaut-shapeless_6.2_2.12/srcs/argonaut-shapeless_6.2_2.12-1.2.0-M4-sources.jar!/" />
+      </SOURCES>
+    </library>
     <library name="SBT: com.typesafe.akka:akka-actor_2.12:2.4.16:jar">
       <CLASSES>
         <root url="jar://$USER_HOME$/.ivy2/cache/com.typesafe.akka/akka-actor_2.12/jars/akka-actor_2.12-2.4.16.jar!/" />
@@ -407,6 +416,15 @@
         <root url="jar://$USER_HOME$/.ivy2/cache/com.typesafe/ssl-config-core_2.12/srcs/ssl-config-core_2.12-0.2.1-sources.jar!/" />
       </SOURCES>
     </library>
+    <library name="SBT: io.argonaut:argonaut_2.12:6.2-RC2:jar">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/io.argonaut/argonaut_2.12/jars/argonaut_2.12-6.2-RC2.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/io.argonaut/argonaut_2.12/srcs/argonaut_2.12-6.2-RC2-sources.jar!/" />
+      </SOURCES>
+    </library>
     <library name="SBT: org.reactivestreams:reactive-streams:1.0.0:jar">
       <CLASSES>
         <root url="jar://$USER_HOME$/.ivy2/cache/org.reactivestreams/reactive-streams/jars/reactive-streams-1.0.0.jar!/" />
@@ -451,6 +469,15 @@
       <JAVADOC />
       <SOURCES>
         <root url="jar://$USER_HOME$/.ivy2/cache/org.scala-lang/scala-library/srcs/scala-library-2.12.3-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="SBT: org.scala-lang:scala-reflect:2.12.3:jar">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/org.scala-lang/scala-reflect/jars/scala-reflect-2.12.3.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/org.scala-lang/scala-reflect/srcs/scala-reflect-2.12.3-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="SBT: org.typelevel:macro-compat_2.12:1.1.1:jar">

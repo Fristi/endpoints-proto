@@ -1,10 +1,10 @@
 package itinere.server
 
-import akka.http.scaladsl.model.{ContentTypes, StatusCodes, HttpResponse => Resp}
 import akka.http.scaladsl.model.StatusCodes.InternalServerError
+import akka.http.scaladsl.model.{StatusCodes, HttpResponse => Resp}
 import akka.http.scaladsl.server.Directives.complete
 import akka.http.scaladsl.server.Route
-import itinere.{CoCartesian, HttpResponseAlgebra, InvariantFunctor, JsonCodec, Tupler}
+import itinere.{CoCartesian, HttpResponseAlgebra, InvariantFunctor, Tupler}
 import shapeless.{CNil, HNil}
 
 import scala.util.{Left, Right}
@@ -23,9 +23,6 @@ trait ServerResponse extends HttpResponseAlgebra {
   }
 
   override def cnil: (CNil) => Route = _ => complete(InternalServerError -> "Unmapped entity")
-
-  override def jsonResponse[A: JsonCodec]: HttpResponseEntity[A] = (x, resp) =>
-    resp.withEntity(ContentTypes.`application/json`, implicitly[JsonCodec[A]].encode(x))
 
   override def response[A, B](statusCode: Int, headers: (A, Resp) => Resp, entity: (B, Resp) => Resp)
                              (implicit T: Tupler[A, B]): (T.Out) => Route = ab => {

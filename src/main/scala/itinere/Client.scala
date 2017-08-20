@@ -26,7 +26,7 @@ abstract class Client(val settings: Settings)(implicit val ec: ExecutionContext,
     a =>
       for {
         resp <- request(a)
-        result <- response(resp, resp.status.intValue())
+        result <- response(resp -> resp.status.intValue())
       } yield result
 
   override implicit val profunctorEndpoint: Profunctor[Endpoint] = new Profunctor[Endpoint] {
@@ -76,7 +76,7 @@ trait ClientResponse extends HttpResponseAlgebra { self: Client =>
   }
   override implicit val httpResponseInvariantFunctor: InvariantFunctor[HttpResponse] = new InvariantFunctor[HttpResponse] {
     override def imap[A, B](fa: PartialFunction[(Resp, Int), Future[A]])(f: (A) => B)(g: (B) => A): PartialFunction[(Resp, Int), Future[B]] = {
-      case (resp, code) => fa(resp, code).map(f)
+      case (resp, code) => fa(resp -> code).map(f)
     }
   }
 }

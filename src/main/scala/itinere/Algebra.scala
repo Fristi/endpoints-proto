@@ -4,6 +4,8 @@ import shapeless._
 
 trait EndpointAlgebra {
 
+
+
   type Request[A]
   type Response[A]
   type Endpoint[A, B]
@@ -12,6 +14,17 @@ trait EndpointAlgebra {
 
   implicit val profunctorEndpoint: Profunctor[Endpoint]
 
+}
+
+trait WithJsonCodec {
+  type JsonCodecTypeClass[A]
+
+  implicit def jsonCodec[A : JsonCodecTypeClass]: JsonCodec[A]
+}
+
+trait HttpJsonAlgebra { self: HttpRequestAlgebra with HttpResponseAlgebra with WithJsonCodec =>
+  def jsonResponse[A : JsonCodec]: HttpResponseEntity[A]
+  def jsonRequest[A : JsonCodec]: HttpRequestEntity[A]
 }
 
 trait HttpEndpointAlgebra extends EndpointAlgebra with HttpRequestAlgebra with HttpResponseAlgebra {
@@ -137,7 +150,7 @@ trait HttpResponseAlgebra {
   def emptyResponseHeaders: HttpResponseHeaders[HNil]
   def emptyResponse: HttpResponseEntity[HNil]
   def cnil: HttpResponse[CNil]
-  def jsonResponse[A : JsonCodec]: HttpResponseEntity[A]
+
   def response[A, B](statusCode: Int, headers: HttpResponseHeaders[A] = emptyResponseHeaders, entity: HttpResponseEntity[B] = emptyResponse)(implicit T: Tupler[A, B]): HttpResponse[T.Out]
 
   implicit val httpResponseResponseHeadersInvariantFunctor: InvariantFunctor[HttpResponseHeaders]
@@ -161,7 +174,7 @@ trait HttpRequestAlgebra extends UrlAlgebra {
 
   def emptyRequestHeaders: HttpRequestHeaders[HNil]
   def emptyRequestEntity: HttpRequestEntity[HNil]
-  def jsonRequest[A : JsonCodec]: HttpRequestEntity[A]
+
   def request[A, B, C, AB](method: HttpMethod, url: Url[A], headers: HttpRequestHeaders[B] = emptyRequestHeaders, entity: HttpRequestEntity[C] = emptyRequestEntity)
                           (implicit T: Tupler.Aux[A, B, AB], TO: Tupler[AB, C]): HttpRequest[TO.Out]
 

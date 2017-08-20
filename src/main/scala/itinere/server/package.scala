@@ -10,7 +10,6 @@ package object server {
     }
   }
 
-  def convToDirective1(directive: Directive0): Directive1[HNil] = {
-    Directive[Tuple1[HNil]](func => func(Tuple1(HNil)))
-  }
+  def convToDirective1(directive: Directive0): Directive1[HNil] =
+    directive.tflatMap[Tuple1[HNil]](_ => Directive.apply[Tuple1[HNil]](f => f(Tuple1(HNil))))
 }

@@ -4,11 +4,10 @@ import akka.http.scaladsl.model.{HttpMethods, HttpMethod => Method}
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.{Directive1, Directives}
 import akka.stream.Materializer
-import itinere.{HttpRequestAlgebra, InvariantFunctor, JsonCodec, Tupler}
+import itinere.{HttpRequestAlgebra, InvariantFunctor, Tupler}
 import shapeless._
 
-import scala.concurrent.duration._
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.ExecutionContext
 
 trait ServerRequest extends HttpRequestAlgebra with ServerUrl {
 
@@ -34,24 +33,14 @@ trait ServerRequest extends HttpRequestAlgebra with ServerUrl {
                                    (implicit T: Tupler.Aux[A, B, AB], TO: Tupler[AB, C]): Directive1[TO.Out] = {
     val methodDirective = convToDirective1(Directives.method(method))
     // we use Directives.pathPrefix to construct url directives, so now we close it
-    val urlDirective = joinDirectives(url.directive, convToDirective1(pathEndOrSingleSlash))
+//    val urlDirective = joinDirectives(url.directive, convToDirective1(pathEndOrSingleSlash))
 
-    joinDirectives(joinDirectives(joinDirectives(urlDirective, headers), entity), methodDirective)
+    joinDirectives(joinDirectives(joinDirectives(url.directive, headers), entity), methodDirective)
   }
 
   override def emptyRequestHeaders: Directive1[HNil] = convToDirective1(pass)
 
   override def emptyRequestEntity: Directive1[HNil] = convToDirective1(pass)
-
-  override def jsonRequest[A: JsonCodec]: Directive1[A] = extractRequest.flatMap { r =>
-
-    def extractJson = for {
-      strictEntity <- r.entity.toStrict(2.seconds)
-      result <- implicitly[JsonCodec[A]].decode(strictEntity.data.utf8String).fold(err => Future.failed(new Throwable(err)), Future.successful)
-    } yield result
-
-    onSuccess(extractJson)
-  }
 
   val directiveFunctor = new InvariantFunctor[Directive1] {
     override def imap[A, B](fa: Directive1[A])(f: (A) => B)(g: (B) => A): Directive1[B] = fa.tmap(x => f(x._1))

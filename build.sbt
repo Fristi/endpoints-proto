@@ -8,7 +8,8 @@ scalaVersion := "2.12.3"
 
 libraryDependencies ++= Seq(
   "com.chuusai" %% "shapeless" % "2.3.2",
-  "com.typesafe.akka" %% "akka-http" % "10.0.1"
+  "com.typesafe.akka" %% "akka-http" % "10.0.1",
+  "com.github.alexarchambault" %% "argonaut-shapeless_6.2" % "1.2.0-M4"
 )
 
 addCompilerPlugin("org.spire-math" %% "kind-projector" % "0.9.4")
