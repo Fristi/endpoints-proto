@@ -3,17 +3,11 @@ package itinere
 import shapeless._
 
 trait EndpointAlgebra {
-
-
-
   type Request[A]
   type Response[A]
   type Endpoint[A, B]
 
   def endpoint[A, B](request: Request[A], response: Response[B]): Endpoint[A, B]
-
-  implicit val profunctorEndpoint: Profunctor[Endpoint]
-
 }
 
 trait WithJsonCodec {

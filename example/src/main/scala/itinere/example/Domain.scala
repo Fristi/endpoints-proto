@@ -1,4 +1,4 @@
-package itinere.domain
+package itinere.example
 
 case class Error(message: String)
 case class User(name: String)

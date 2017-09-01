@@ -1,45 +1,30 @@
-package itinere
+package itinere.example
 
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.model.{HttpRequest, HttpResponse, Uri}
 import akka.stream.ActorMaterializer
 import akka.stream.scaladsl.{Sink, Source}
-import argonaut.derive.{DerivedInstances, SingletonInstances}
-import argonaut.{CodecJson, DecodeJson, EncodeJson, Parse}
-import itinere.domain._
+import itinere.client.{Client, ClientJson, ClientSettings}
+import itinere.json.argonaut.ArgonautJsonCodec
 import itinere.server.{Server, ServerJson}
+import itinere._
 
-import scala.concurrent.{Await, Future}
 import scala.concurrent.duration._
+import scala.concurrent.{Await, Future}
 
 
-trait ArgonautShapeless extends SingletonInstances with DerivedInstances
 
-trait ArgonautJsonCodec extends WithJsonCodec with ArgonautShapeless {
-  override type JsonCodecTypeClass[A] = CodecJson[A]
 
-  implicit def codecJson[A](implicit E: EncodeJson[A], D: DecodeJson[A]): CodecJson[A] =
-    CodecJson(E.apply, D.apply)
-
-  implicit def jsonCodec[A : CodecJson]: JsonCodec[A] = new JsonCodec[A] {
-    override def encode(entity: A): String = implicitly[CodecJson[A]].encode(entity).nospaces
-
-    override def decode(input: String): Either[String, A] =
-      Parse.parse(input)
-        .right
-        .flatMap(json => implicitly[CodecJson[A]].decodeJson(json).fold[Either[String, A]]((err, cursor) => Left(s"$err -> $cursor"), Right.apply))
-  }
-}
-
-trait Test extends HttpEndpointAlgebra with HttpJsonAlgebra with ArgonautJsonCodec {
+trait ApiEndpoints extends HttpEndpointAlgebra with HttpJsonAlgebra with ArgonautJsonCodec {
 
   def listUsers: Endpoint[ListUserRequest, DomainResponse[List[User]]] = endpoint(
     request(GET, path / "test" /? optQs[String]("kind")).as[ListUserRequest],
     (
-      response(400, entity = jsonResponse[Error]).as[BadRequest] |
-        (response(404, entity = jsonResponse[Error]).as[NotFound] |
-        (response(200, entity = jsonResponse[List[User]]).as[Success[List[User]]] | cnil))
+      response(404, entity = jsonResponse[Error]).as[NotFound] |
+        (response(200, entity = jsonResponse[List[User]]).as[Success[List[User]]] |
+        (response(400, entity = jsonResponse[Error]).as[BadRequest] |
+        cnil))
     ).as[DomainResponse[List[User]]]
   )
 
@@ -54,7 +39,7 @@ object ServerApp extends App {
   // needed for the future flatMap/onComplete in the end
   implicit val executionContext = system.dispatcher
 
-  object ServerImpl extends Server with Test with ServerJson {
+  object ServerImpl extends Server with ApiEndpoints with ServerJson {
     val routes = listUsers.implementedByAsync {
       case r if r.kind.contains("notFound") => Future.successful(NotFound(Error("notFound")))
       case r if r.kind.contains("badRequest") => Future.successful(BadRequest(Error("badRequest")))
@@ -80,14 +65,14 @@ object ClientApp extends App {
       .runWith(Sink.head)
 
 
-  val settings = Settings(
+  val settings = ClientSettings(
     baseUri = Uri("/"),
     toStrictTimeout = 2.seconds,
     stringContentExtractor = _.data.utf8String,
     requestExecutor = pipeline
   )
 
-  object HttpClient extends Client(settings) with ClientJson with Test
+  object HttpClient extends Client(settings) with ClientJson with ApiEndpoints
 
 
   println(Await.result(HttpClient.listUsers(ListUserRequest(Some("badRequest"))), 2.seconds))
