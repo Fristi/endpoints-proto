@@ -139,8 +139,18 @@
   </component>
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/itinere.iml" filepath="$PROJECT_DIR$/.idea/modules/itinere.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/itinere-build.iml" filepath="$PROJECT_DIR$/.idea/modules/itinere-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/akka-http-client.iml" filepath="$PROJECT_DIR$/.idea/modules/akka-http-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/akka-http-client-build.iml" filepath="$PROJECT_DIR$/.idea/modules/akka-http-client-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/akka-http-server.iml" filepath="$PROJECT_DIR$/.idea/modules/akka-http-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/akka-http-server-build.iml" filepath="$PROJECT_DIR$/.idea/modules/akka-http-server-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/algebra.iml" filepath="$PROJECT_DIR$/.idea/modules/algebra.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/algebra-build.iml" filepath="$PROJECT_DIR$/.idea/modules/algebra-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/example.iml" filepath="$PROJECT_DIR$/.idea/modules/example.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/example-build.iml" filepath="$PROJECT_DIR$/.idea/modules/example-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/json-argonaut.iml" filepath="$PROJECT_DIR$/.idea/modules/json-argonaut.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/json-argonaut-build.iml" filepath="$PROJECT_DIR$/.idea/modules/json-argonaut-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/root.iml" filepath="$PROJECT_DIR$/.idea/modules/root.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/root-build.iml" filepath="$PROJECT_DIR$/.idea/modules/root-build.iml" />
     </modules>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK">
@@ -263,7 +273,8 @@
     </option>
   </component>
   <component name="ScalaCompilerConfiguration">
-    <profile name="SBT 1" modules="itinere">
+    <profile name="SBT 1" modules="itinere,root" />
+    <profile name="SBT 2" modules="akka-http-client,akka-http-server,algebra,example,json-argonaut">
       <option name="implicitConversions" value="true" />
       <option name="higherKinds" value="true" />
       <option name="existentials" value="true" />
@@ -324,6 +335,16 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/akka-http-client" />
+            <option value="$PROJECT_DIR$/akka-http-client/project" />
+            <option value="$PROJECT_DIR$/akka-http-server" />
+            <option value="$PROJECT_DIR$/akka-http-server/project" />
+            <option value="$PROJECT_DIR$/algebra" />
+            <option value="$PROJECT_DIR$/algebra/project" />
+            <option value="$PROJECT_DIR$/example" />
+            <option value="$PROJECT_DIR$/example/project" />
+            <option value="$PROJECT_DIR$/json-argonaut" />
+            <option value="$PROJECT_DIR$/json-argonaut/project" />
             <option value="$PROJECT_DIR$/project" />
           </set>
         </option>
@@ -451,6 +472,23 @@
       <SOURCES>
         <root url="jar://$USER_HOME$/.ivy2/cache/org.scala-lang.modules/scala-parser-combinators_2.12/srcs/scala-parser-combinators_2.12-1.0.4-sources.jar!/" />
       </SOURCES>
+    </library>
+    <library name="SBT: org.scala-lang:scala-library:2.10.6:jar" type="Scala">
+      <properties>
+        <option name="languageLevel" value="Scala_2_10" />
+        <compiler-classpath>
+          <root url="file://$USER_HOME$/.sbt/boot/scala-2.10.6/lib/jansi.jar" />
+          <root url="file://$USER_HOME$/.sbt/boot/scala-2.10.6/lib/jline.jar" />
+          <root url="file://$USER_HOME$/.sbt/boot/scala-2.10.6/lib/scala-compiler.jar" />
+          <root url="file://$USER_HOME$/.sbt/boot/scala-2.10.6/lib/scala-library.jar" />
+          <root url="file://$USER_HOME$/.sbt/boot/scala-2.10.6/lib/scala-reflect.jar" />
+        </compiler-classpath>
+      </properties>
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.6/lib/scala-library.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
     </library>
     <library name="SBT: org.scala-lang:scala-library:2.12.3:jar" type="Scala">
       <properties>

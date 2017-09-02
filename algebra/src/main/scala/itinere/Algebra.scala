@@ -141,6 +141,23 @@ trait HttpResponseAlgebra {
   type HttpResponseEntity[A]
   type HttpResponse[A]
 
+  final class CoproductHttpResponseBuilder[B <: Coproduct](coproduct: HttpResponse[B]) {
+    def add[A](resp: HttpResponse[A]): CoproductHttpResponseBuilder[A :+: B] = {
+      val newCoproduct = httpResponseCocartesian.sum(resp, coproduct).imap {
+        case Left(l) => Inl(l)
+        case Right(r) => Inr(r)
+      } {
+        case Inl(l) => Left(l)
+        case Inr(r) => Right(r)
+      }
+
+      new CoproductHttpResponseBuilder(newCoproduct)
+    }
+    def as[A](implicit T: Transformer[HttpResponse, B, A]) = T(coproduct)
+  }
+
+  def coproductResponseBuilder = new CoproductHttpResponseBuilder(cnil)
+
   def emptyResponseHeaders: HttpResponseHeaders[HNil]
   def emptyResponse: HttpResponseEntity[HNil]
   def cnil: HttpResponse[CNil]

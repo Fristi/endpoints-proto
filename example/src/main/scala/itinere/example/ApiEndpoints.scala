@@ -5,10 +5,10 @@ import akka.http.scaladsl.Http
 import akka.http.scaladsl.model.{HttpRequest, HttpResponse, Uri}
 import akka.stream.ActorMaterializer
 import akka.stream.scaladsl.{Sink, Source}
+import itinere._
 import itinere.client.{Client, ClientJson, ClientSettings}
 import itinere.json.argonaut.ArgonautJsonCodec
 import itinere.server.{Server, ServerJson}
-import itinere._
 
 import scala.concurrent.duration._
 import scala.concurrent.{Await, Future}
@@ -18,14 +18,16 @@ import scala.concurrent.{Await, Future}
 
 trait ApiEndpoints extends HttpEndpointAlgebra with HttpJsonAlgebra with ArgonautJsonCodec {
 
+  def domainResponse[A](implicit E: JsonCodec[A]): HttpResponse[DomainResponse[A]] =
+    coproductResponseBuilder
+      .add(response(404, entity = jsonResponse[Error]).as[NotFound])
+      .add(response(200, entity = jsonResponse[A]).as[Success[A]])
+      .add(response(400, entity = jsonResponse[Error]).as[BadRequest])
+      .as[DomainResponse[A]]
+
   def listUsers: Endpoint[ListUserRequest, DomainResponse[List[User]]] = endpoint(
     request(GET, path / "test" /? optQs[String]("kind")).as[ListUserRequest],
-    (
-      response(404, entity = jsonResponse[Error]).as[NotFound] |
-        (response(200, entity = jsonResponse[List[User]]).as[Success[List[User]]] |
-        (response(400, entity = jsonResponse[Error]).as[BadRequest] |
-        cnil))
-    ).as[DomainResponse[List[User]]]
+    domainResponse[List[User]]
   )
 
 }
