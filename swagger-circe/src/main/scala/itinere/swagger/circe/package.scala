@@ -83,7 +83,7 @@ package object circe {
     def encodeBody(a: SwaggerParameter.Body): Json = Json.obj(
       "name" -> Json.fromString(a.name),
       "in" -> Json.fromString("body"),
-      "description" -> a.description.fold(Json.fromString(""))(Json.fromString),
+      "description" -> a.description.fold(Json.Null)(Json.fromString),
       "required" -> Json.fromBoolean(a.required),
       "schema" -> a.schema.fold(Json.Null)(schemaToJson)
     )

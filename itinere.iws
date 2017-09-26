@@ -3,7 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="72deed5b-7f8e-4baf-a187-2cb22a9e7d28" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/example/src/main/scala/itinere/example/ApiEndpoints.scala" afterPath="$PROJECT_DIR$/example/src/main/scala/itinere/example/ApiEndpoints.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/example/src/main/scala/itinere/example/Domain.scala" afterPath="$PROJECT_DIR$/example/src/main/scala/itinere/example/Domain.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/itinere.iws" afterPath="$PROJECT_DIR$/itinere.iws" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/swagger-circe/src/main/scala/itinere/swagger/circe/package.scala" afterPath="$PROJECT_DIR$/swagger-circe/src/main/scala/itinere/swagger/circe/package.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/SwaggerGen.scala" afterPath="$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/SwaggerGen.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/SwaggerGenJson.scala" afterPath="$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/SwaggerGenJson.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/Types.scala" afterPath="$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/Types.scala" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -71,34 +75,32 @@
       <file leaf-file-name="ApiEndpoints.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/example/src/main/scala/itinere/example/ApiEndpoints.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="97">
-              <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="33" selection-end-column="3" />
+            <state relative-caret-position="214">
+              <caret line="137" column="0" lean-forward="true" selection-start-line="137" selection-start-column="0" selection-end-line="137" selection-end-column="0" />
               <folding>
                 <element signature="e#25#54#0" expanded="true" />
-                <marker date="1506425359000" expanded="true" signature="703:788" ph="{...}" />
+                <marker date="1506433661000" expanded="true" signature="691:776" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="build.sbt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/build.sbt">
+      <file leaf-file-name="Domain.scala" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/example/src/main/scala/itinere/example/Domain.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="469">
-              <caret line="118" column="85" lean-forward="false" selection-start-line="118" selection-start-column="85" selection-end-line="118" selection-end-column="85" />
+            <state relative-caret-position="75">
+              <caret line="5" column="27" lean-forward="false" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="package.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/swagger-circe/src/main/scala/itinere/swagger/circe/package.scala">
+      <file leaf-file-name="SwaggerGenJson.scala" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/SwaggerGenJson.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="218">
-              <caret line="85" column="49" lean-forward="false" selection-start-line="85" selection-start-column="49" selection-end-line="85" selection-end-column="49" />
-              <folding>
-                <element signature="e#25#56#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="75">
+              <caret line="5" column="6" lean-forward="false" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -115,11 +117,23 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="SwaggerGen.scala" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/SwaggerGen.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="18" column="6" lean-forward="false" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="6" />
+              <folding>
+                <element signature="e#25#48#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="Types.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/Types.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="157">
-              <caret line="118" column="0" lean-forward="false" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
+            <state relative-caret-position="398">
+              <caret line="113" column="32" lean-forward="true" selection-start-line="113" selection-start-column="32" selection-end-line="113" selection-end-column="32" />
               <folding>
                 <element signature="e#25#48#0" expanded="true" />
               </folding>
@@ -140,7 +154,7 @@
       <file leaf-file-name="Schema.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/Schema.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-26">
+            <state relative-caret-position="97">
               <caret line="22" column="7" lean-forward="false" selection-start-line="22" selection-start-column="7" selection-end-line="22" selection-end-column="7" />
               <folding>
                 <element signature="e#25#38#0" expanded="true" />
@@ -187,6 +201,9 @@
       <find>extends SwaggerFormat</find>
       <find>extends In</find>
       <find>schema</find>
+      <find>method</find>
+      <find>returnt</find>
+      <find>returnType</find>
       <find>description</find>
     </findStrings>
     <replaceStrings>
@@ -246,16 +263,16 @@
         <option value="$PROJECT_DIR$/algebra/src/main/scala/itinere/JsonSchema.scala" />
         <option value="$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/Docless.scala" />
         <option value="$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/DoclessJsonCodec.scala" />
-        <option value="$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/SwaggerGenJson.scala" />
         <option value="$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/Schema.scala" />
-        <option value="$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/SwaggerGen.scala" />
-        <option value="$PROJECT_DIR$/example/src/main/scala/itinere/example/Domain.scala" />
         <option value="$PROJECT_DIR$/algebra/src/main/scala/itinere/Algebra.scala" />
-        <option value="$PROJECT_DIR$/build.sbt" />
         <option value="$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/SwaggerGenUrls.scala" />
-        <option value="$PROJECT_DIR$/swagger-circe/src/main/scala/itinere/swagger/circe/package.scala" />
         <option value="$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/SwaggerGenRequest.scala" />
+        <option value="$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/SwaggerGen.scala" />
+        <option value="$PROJECT_DIR$/build.sbt" />
+        <option value="$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/SwaggerGenJson.scala" />
         <option value="$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/Types.scala" />
+        <option value="$PROJECT_DIR$/swagger-circe/src/main/scala/itinere/swagger/circe/package.scala" />
+        <option value="$PROJECT_DIR$/example/src/main/scala/itinere/example/Domain.scala" />
         <option value="$PROJECT_DIR$/example/src/main/scala/itinere/example/ApiEndpoints.scala" />
       </list>
     </option>
@@ -576,7 +593,7 @@
     </recent_temporary>
   </component>
   <component name="SbtLocalSettings">
-    <option name="lastUpdateTimestamp" value="1506418279094" />
+    <option name="lastUpdateTimestamp" value="1506429752412" />
     <option name="availableProjects">
       <map>
         <entry>
@@ -735,7 +752,14 @@
       <option name="project" value="LOCAL" />
       <updated>1506425120294</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Small changs">
+      <created>1506426093613</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1506426093613</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -751,7 +775,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.583691" sideWeight="0.5028612" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.55078685" sideWeight="0.49713877" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.55078685" sideWeight="0.49713877" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -821,7 +845,8 @@
     <MESSAGE value="Clean up" />
     <MESSAGE value="WIP Swagger" />
     <MESSAGE value="Working definition" />
-    <option name="LAST_COMMIT_MESSAGE" value="Working definition" />
+    <MESSAGE value="Small changs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Small changs" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -830,56 +855,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/akka-http-server/src/main/scala/itinere/server/ServerUrl.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="57" column="6" lean-forward="false" selection-start-line="57" selection-start-column="6" selection-end-line="57" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.ivy2/cache/com.timeout/docless_2.12/srcs/docless_2.12-0.5.0-sources.jar!/com/timeout/docless/swagger/HasSchema.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="6" lean-forward="false" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.ivy2/cache/com.timeout/docless_2.12/srcs/docless_2.12-0.5.0-sources.jar!/com/timeout/docless/swagger/OperationParameters.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="11" lean-forward="false" selection-start-line="2" selection-start-column="11" selection-end-line="2" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.ivy2/cache/com.timeout/docless_2.12/srcs/docless_2.12-0.5.0-sources.jar!/com/timeout/docless/swagger/Paths.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="26" lean-forward="true" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.ivy2/cache/com.timeout/docless_2.12/srcs/docless_2.12-0.5.0-sources.jar!/com/timeout/docless/swagger/ParamSetters.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="6" lean-forward="false" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.ivy2/cache/com.timeout/docless_2.12/srcs/docless_2.12-0.5.0-sources.jar!/com/timeout/docless/swagger/Info.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="11" lean-forward="false" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.ivy2/cache/com.timeout/docless_2.12/srcs/docless_2.12-0.5.0-sources.jar!/com/timeout/docless/swagger/Scheme.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/akka-http-client/src/main/scala/itinere/client/ClientResponse.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -998,6 +973,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="8" column="32" lean-forward="true" selection-start-line="8" selection-start-column="32" selection-end-line="8" selection-end-column="32" />
+          <folding>
+            <element signature="e#31#89#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1127,27 +1105,99 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/algebra/src/main/scala/itinere/JsonSchema.scala">
+    <entry file="jar://$USER_HOME$/.ivy2/cache/io.circe/circe-core_2.12/srcs/circe-core_2.12-0.8.0-sources.jar!/io/circe/Printer.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1200">
-          <caret line="80" column="82" lean-forward="false" selection-start-line="80" selection-start-column="82" selection-end-line="80" selection-end-column="82" />
-          <folding>
-            <element signature="e#17#35#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="87">
+          <caret line="33" column="24" lean-forward="false" selection-start-line="33" selection-start-column="24" selection-end-line="33" selection-end-column="24" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/algebra/src/main/scala/itinere/Algebra.scala">
+    <entry file="file://$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/SwaggerGenRequest.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-106">
-          <caret line="10" column="1" lean-forward="false" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
+        <state relative-caret-position="439">
+          <caret line="30" column="184" lean-forward="false" selection-start-line="30" selection-start-column="184" selection-end-line="30" selection-end-column="184" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.ivy2/cache/org.scala-lang/scala-reflect/jars/scala-reflect-2.12.3.jar!/scala/reflect/macros/blackbox/Context.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="6" lean-forward="false" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.ivy2/cache/org.scala-lang/scala-reflect/srcs/scala-reflect-2.12.3-sources.jar!/scala/reflect/macros/Aliases.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="223">
+          <caret line="55" column="7" lean-forward="false" selection-start-line="55" selection-start-column="7" selection-end-line="55" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.ivy2/cache/org.scala-lang/scala-reflect/srcs/scala-reflect-2.12.3-sources.jar!/scala/reflect/macros/blackbox/Context.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1425">
+          <caret line="95" column="16" lean-forward="false" selection-start-line="95" selection-start-column="16" selection-end-line="95" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.ivy2/cache/org.scala-lang/scala-reflect/srcs/scala-reflect-2.12.3-sources.jar!/scala/reflect/api/Types.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="536">
+          <caret line="307" column="8" lean-forward="false" selection-start-line="307" selection-start-column="8" selection-end-line="307" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.ivy2/cache/org.scala-lang/scala-reflect/srcs/scala-reflect-2.12.3-sources.jar!/scala/reflect/internal/Symbols.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6">
+          <caret line="2909" column="33" lean-forward="true" selection-start-line="2909" selection-start-column="33" selection-end-line="2909" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.ivy2/cache/org.scala-lang/scala-reflect/srcs/scala-reflect-2.12.3-sources.jar!/scala/reflect/api/Symbols.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="750" column="17" lean-forward="false" selection-start-line="750" selection-start-column="17" selection-end-line="750" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.ivy2/cache/org.scala-lang/scala-reflect/srcs/scala-reflect-2.12.3-sources.jar!/scala/reflect/api/Mirrors.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="737">
+          <caret line="461" column="8" lean-forward="false" selection-start-line="461" selection-start-column="8" selection-end-line="461" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.sbt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="103" column="49" lean-forward="false" selection-start-line="103" selection-start-column="49" selection-end-line="103" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/Types.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="398">
+          <caret line="113" column="32" lean-forward="true" selection-start-line="113" selection-start-column="32" selection-end-line="113" selection-end-column="32" />
+          <folding>
+            <element signature="e#25#48#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/Schema.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-26">
+        <state relative-caret-position="97">
           <caret line="22" column="7" lean-forward="false" selection-start-line="22" selection-start-column="7" selection-end-line="22" selection-end-column="7" />
           <folding>
             <element signature="e#25#38#0" expanded="true" />
@@ -1155,34 +1205,48 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/SwaggerGen.scala">
+    <entry file="file://$PROJECT_DIR$/swagger-circe/src/main/scala/itinere/swagger/circe/package.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="23" lean-forward="true" selection-start-line="0" selection-start-column="23" selection-end-line="0" selection-end-column="23" />
-          <folding />
+        <state relative-caret-position="1251">
+          <caret line="85" column="51" lean-forward="false" selection-start-line="85" selection-start-column="51" selection-end-line="85" selection-end-column="51" />
+          <folding>
+            <element signature="e#25#56#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/algebra/src/main/scala/itinere/JsonSchema.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="87">
+          <caret line="62" column="6" lean-forward="false" selection-start-line="62" selection-start-column="6" selection-end-line="62" selection-end-column="6" />
+          <folding>
+            <element signature="e#17#35#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/SwaggerGenJson.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
-          <caret line="5" column="20" lean-forward="false" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
+          <caret line="5" column="6" lean-forward="false" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/example/src/main/scala/itinere/example/Domain.scala">
+    <entry file="file://$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/SwaggerGen.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="270">
+          <caret line="18" column="6" lean-forward="false" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="6" />
+          <folding>
+            <element signature="e#25#48#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build.sbt">
+    <entry file="file://$PROJECT_DIR$/algebra/src/main/scala/itinere/Algebra.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="469">
-          <caret line="118" column="85" lean-forward="false" selection-start-line="118" selection-start-column="85" selection-end-line="118" selection-end-column="85" />
+        <state relative-caret-position="357">
+          <caret line="188" column="6" lean-forward="false" selection-start-line="188" selection-start-column="6" selection-end-line="188" selection-end-column="6" />
           <folding />
         </state>
       </provider>
@@ -1197,49 +1261,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.ivy2/cache/io.circe/circe-core_2.12/srcs/circe-core_2.12-0.8.0-sources.jar!/io/circe/Printer.scala">
+    <entry file="file://$PROJECT_DIR$/example/src/main/scala/itinere/example/Domain.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="87">
-          <caret line="33" column="24" lean-forward="false" selection-start-line="33" selection-start-column="24" selection-end-line="33" selection-end-column="24" />
+        <state relative-caret-position="75">
+          <caret line="5" column="27" lean-forward="false" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/swagger-circe/src/main/scala/itinere/swagger/circe/package.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="85" column="49" lean-forward="false" selection-start-line="85" selection-start-column="49" selection-end-line="85" selection-end-column="49" />
-          <folding>
-            <element signature="e#25#56#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/SwaggerGenRequest.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="439">
-          <caret line="30" column="184" lean-forward="false" selection-start-line="30" selection-start-column="184" selection-end-line="30" selection-end-column="184" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/Types.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="118" column="0" lean-forward="false" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
-          <folding>
-            <element signature="e#25#48#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/example/src/main/scala/itinere/example/ApiEndpoints.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="97">
-          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="33" selection-end-column="3" />
+        <state relative-caret-position="214">
+          <caret line="137" column="0" lean-forward="true" selection-start-line="137" selection-start-column="0" selection-end-line="137" selection-end-column="0" />
           <folding>
             <element signature="e#25#54#0" expanded="true" />
-            <marker date="1506425359000" expanded="true" signature="703:788" ph="{...}" />
+            <marker date="1506433661000" expanded="true" signature="691:776" ph="{...}" />
           </folding>
         </state>
       </provider>

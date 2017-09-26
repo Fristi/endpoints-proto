@@ -8,10 +8,10 @@ import akka.stream.scaladsl.{Sink, Source}
 import io.circe.Printer
 import itinere._
 import itinere.client.{Client, ClientJson, ClientSettings}
-import itinere.swagger.{SwaggerApi, SwaggerApiInfo, SwaggerGen, SwaggerGenJson}
 import itinere.json.argonaut.ArgonautJsonCodec
 import itinere.server.{Server, ServerJson}
 import itinere.swagger.circe._
+import itinere.swagger.{SwaggerApiInfo, SwaggerGen, SwaggerGenJson}
 
 import scala.concurrent.duration._
 import scala.concurrent.{Await, Future}
@@ -29,10 +29,14 @@ trait ApiEndpoints extends HttpEndpointAlgebra with HttpJsonAlgebra with Argonau
       .as[DomainResponse[A]]
 
   def listUsers: Endpoint[ListUserRequest, DomainResponse[List[User]]] = endpoint(
-    request(GET, path / "test" / segment[String]("user") /? optQs[String]("kind")).as[ListUserRequest],
+    request(GET, path / "users" /? optQs[String]("kind")).as[ListUserRequest],
     domainResponse[List[User]]
   )
 
+  def addUser: Endpoint[AddUserRequest, DomainResponse[User]] = endpoint(
+    request(POST, path / "users", entity = jsonRequest[User]).as[AddUserRequest],
+    domainResponse[User]
+  )
 }
 
 //case class ServiceId(id: String) extends AnyVal
@@ -119,15 +123,10 @@ object ServerApp extends App {
 
 object DoclessApp extends App {
 
-  class SwaggerTest extends SwaggerGen with SwaggerGenJson with ApiEndpoints
+  object SwaggerDocs extends SwaggerGen with SwaggerGenJson with ApiEndpoints
 
-  val t = new SwaggerTest
 
-//  println(t.listUsers)
-
-  val (manifest, operation) = t.listUsers.toReferenceTree.run
-
-  val api = SwaggerApi(SwaggerApiInfo("Simple API", "1.0.0", "A simple api"), List(operation), manifest, "/")
+  val api = SwaggerDocs.api(SwaggerApiInfo("Simple API", "1.0.0", "A simple api"), "/")(SwaggerDocs.listUsers, SwaggerDocs.addUser)
 
   println(encoderSwaggerApi(api).pretty(new Printer(preserveOrder = true, dropNullKeys = true, "")))
 }
@@ -155,8 +154,8 @@ object ClientApp extends App {
   object HttpClient extends Client(settings) with ClientJson with ApiEndpoints
 
 
-  println(Await.result(HttpClient.listUsers(ListUserRequest("test", Some("badRequest"))), 2.seconds))
-  println(Await.result(HttpClient.listUsers(ListUserRequest("test", Some("notFound"))), 2.seconds))
-  println(Await.result(HttpClient.listUsers(ListUserRequest("test", None)), 2.seconds))
+  println(Await.result(HttpClient.listUsers(ListUserRequest(Some("badRequest"))), 2.seconds))
+  println(Await.result(HttpClient.listUsers(ListUserRequest(Some("notFound"))), 2.seconds))
+  println(Await.result(HttpClient.listUsers(ListUserRequest(None)), 2.seconds))
 
 }
