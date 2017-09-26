@@ -151,6 +151,10 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/json-argonaut-build.iml" filepath="$PROJECT_DIR$/.idea/modules/json-argonaut-build.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/root.iml" filepath="$PROJECT_DIR$/.idea/modules/root.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/root-build.iml" filepath="$PROJECT_DIR$/.idea/modules/root-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/swagger.iml" filepath="$PROJECT_DIR$/.idea/modules/swagger.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/swagger-build.iml" filepath="$PROJECT_DIR$/.idea/modules/swagger-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/swagger-circe.iml" filepath="$PROJECT_DIR$/.idea/modules/swagger-circe.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/swagger-circe-build.iml" filepath="$PROJECT_DIR$/.idea/modules/swagger-circe-build.iml" />
     </modules>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK">
@@ -274,7 +278,7 @@
   </component>
   <component name="ScalaCompilerConfiguration">
     <profile name="SBT 1" modules="itinere,root" />
-    <profile name="SBT 2" modules="akka-http-client,akka-http-server,algebra,example,json-argonaut">
+    <profile name="SBT 2" modules="docless,nyaya,akka-http-client,akka-http-server,algebra,example,json-argonaut,swagger,swagger-circe">
       <option name="implicitConversions" value="true" />
       <option name="higherKinds" value="true" />
       <option name="existentials" value="true" />
@@ -315,10 +319,8 @@
         <parameter value="-Ywarn-nullary-override" />
         <parameter value="-Ywarn-nullary-unit" />
         <parameter value="-Ywarn-numeric-widen" />
-        <parameter value="-Ywarn-unused:implicits" />
         <parameter value="-Ywarn-unused:imports" />
         <parameter value="-Ywarn-unused:locals" />
-        <parameter value="-Ywarn-unused:params" />
         <parameter value="-Ywarn-unused:patvars" />
         <parameter value="-Ywarn-unused:privates" />
         <parameter value="-Ywarn-value-discard" />
@@ -346,6 +348,10 @@
             <option value="$PROJECT_DIR$/json-argonaut" />
             <option value="$PROJECT_DIR$/json-argonaut/project" />
             <option value="$PROJECT_DIR$/project" />
+            <option value="$PROJECT_DIR$/swagger" />
+            <option value="$PROJECT_DIR$/swagger-circe" />
+            <option value="$PROJECT_DIR$/swagger-circe/project" />
+            <option value="$PROJECT_DIR$/swagger/project" />
           </set>
         </option>
         <option name="sbtVersion" value="0.13.16" />
@@ -446,6 +452,42 @@
         <root url="jar://$USER_HOME$/.ivy2/cache/io.argonaut/argonaut_2.12/srcs/argonaut_2.12-6.2-RC2-sources.jar!/" />
       </SOURCES>
     </library>
+    <library name="SBT: io.circe:circe-core_2.12:0.8.0:jar">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/io.circe/circe-core_2.12/jars/circe-core_2.12-0.8.0.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/io.circe/circe-core_2.12/srcs/circe-core_2.12-0.8.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="SBT: io.circe:circe-numbers_2.12:0.8.0:jar">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/io.circe/circe-numbers_2.12/jars/circe-numbers_2.12-0.8.0.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/io.circe/circe-numbers_2.12/srcs/circe-numbers_2.12-0.8.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="SBT: org.julienrf:enum-values_2.12:3.1:jar">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/org.julienrf/enum-values_2.12/jars/enum-values_2.12-3.1.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/org.julienrf/enum-values_2.12/srcs/enum-values_2.12-3.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="SBT: org.julienrf:enum_2.12:3.1:jar">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/org.julienrf/enum_2.12/jars/enum_2.12-3.1.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/org.julienrf/enum_2.12/srcs/enum_2.12-3.1-sources.jar!/" />
+      </SOURCES>
+    </library>
     <library name="SBT: org.reactivestreams:reactive-streams:1.0.0:jar">
       <CLASSES>
         <root url="jar://$USER_HOME$/.ivy2/cache/org.reactivestreams/reactive-streams/jars/reactive-streams-1.0.0.jar!/" />
@@ -516,6 +558,42 @@
       <JAVADOC />
       <SOURCES>
         <root url="jar://$USER_HOME$/.ivy2/cache/org.scala-lang/scala-reflect/srcs/scala-reflect-2.12.3-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="SBT: org.typelevel:cats-core_2.12:1.0.0-MF:jar">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/org.typelevel/cats-core_2.12/jars/cats-core_2.12-1.0.0-MF.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/org.typelevel/cats-core_2.12/srcs/cats-core_2.12-1.0.0-MF-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="SBT: org.typelevel:cats-kernel_2.12:1.0.0-MF:jar">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/org.typelevel/cats-kernel_2.12/jars/cats-kernel_2.12-1.0.0-MF.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/org.typelevel/cats-kernel_2.12/srcs/cats-kernel_2.12-1.0.0-MF-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="SBT: org.typelevel:cats-macros_2.12:1.0.0-MF:jar">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/org.typelevel/cats-macros_2.12/jars/cats-macros_2.12-1.0.0-MF.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/org.typelevel/cats-macros_2.12/srcs/cats-macros_2.12-1.0.0-MF-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="SBT: org.typelevel:machinist_2.12:0.6.1:jar">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/org.typelevel/machinist_2.12/jars/machinist_2.12-0.6.1.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/org.typelevel/machinist_2.12/srcs/machinist_2.12-0.6.1-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="SBT: org.typelevel:macro-compat_2.12:1.1.1:jar">

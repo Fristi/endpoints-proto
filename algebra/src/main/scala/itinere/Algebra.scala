@@ -16,9 +16,9 @@ trait WithJsonCodec {
   implicit def jsonCodec[A : JsonCodecTypeClass]: JsonCodec[A]
 }
 
-trait HttpJsonAlgebra { self: HttpRequestAlgebra with HttpResponseAlgebra with WithJsonCodec =>
-  def jsonResponse[A : JsonCodec]: HttpResponseEntity[A]
-  def jsonRequest[A : JsonCodec]: HttpRequestEntity[A]
+trait HttpJsonAlgebra { self: HttpRequestAlgebra with HttpResponseAlgebra =>
+  def jsonResponse[A : JsonCodec : JsonSchema]: HttpResponseEntity[A]
+  def jsonRequest[A : JsonCodec : JsonSchema]: HttpRequestEntity[A]
 }
 
 trait HttpEndpointAlgebra extends EndpointAlgebra with HttpRequestAlgebra with HttpResponseAlgebra {
@@ -105,7 +105,7 @@ trait UrlAlgebra {
   def staticPathSegment(segment: String): Path[HNil]
 
   /** Builds a path segment carrying an `A` information */
-  def segment[A](implicit s: Segment[A]): Path[A]
+  def segment[A](name: String, description: Option[String] = None)(implicit s: Segment[A]): Path[A]
 
   /** Chains the two paths */
   def chainPaths[A, B](first: Path[A], second: Path[B])(implicit tupler: Tupler[A, B]): Path[tupler.Out]

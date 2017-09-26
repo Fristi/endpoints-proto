@@ -58,7 +58,8 @@ trait ClientUrls extends UrlAlgebra {
 
   def staticPathSegment(segment: String) = (_: HNil) => segment
 
-  def segment[A](implicit s: Segment[A]): Path[A] = a => s.encode(a)
+  def segment[A](name: String, description: Option[String] = None)(implicit s: Segment[A]): Path[A] =
+    a => s.encode(a)
 
   def chainPaths[A, B](first: Path[A], second: Path[B])(implicit tupler: Tupler[A, B]): Path[tupler.Out] =
     (ab: tupler.Out) => {

@@ -55,7 +55,7 @@ trait ServerUrl extends UrlAlgebra {
 
   implicit def longSegment: Segment[Long] = PathMatchers.LongNumber
 
-  def segment[A](implicit s: Segment[A]): Path[A] = {
+  def segment[A](name: String, description: Option[String] = None)(implicit s: Segment[A]): Path[A] = {
     new Path(pathPrefix(s))
   }
 

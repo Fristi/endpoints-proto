@@ -44,10 +44,10 @@ lazy val commonSettings = Seq(
     "-Ywarn-nullary-override", // Warn when non-nullary `def f()' overrides nullary `def f'.
     "-Ywarn-nullary-unit", // Warn when nullary methods return Unit.
     "-Ywarn-numeric-widen", // Warn when numerics are widened.
-    "-Ywarn-unused:implicits", // Warn if an implicit parameter is unused.
+//    "-Ywarn-unused:implicits", // Warn if an implicit parameter is unused.
     "-Ywarn-unused:imports", // Warn if an import selector is not referenced.
     "-Ywarn-unused:locals", // Warn if a local definition is unused.
-    "-Ywarn-unused:params", // Warn if a value parameter is unused.
+//    "-Ywarn-unused:params", // Warn if a value parameter is unused.
     "-Ywarn-unused:patvars", // Warn if a variable bound in a pattern is unused.
     "-Ywarn-unused:privates", // Warn if a private member is unused.
     "-Ywarn-value-discard" // Warn when non-Unit expression results are unused.
@@ -62,7 +62,8 @@ lazy val algebra = project.in(file("algebra"))
   .settings(
     name := "itinere-algebra",
     libraryDependencies ++= Seq(
-      "com.chuusai" %% "shapeless" % "2.3.2"
+      "com.chuusai" %% "shapeless" % "2.3.2",
+      "org.julienrf" %% "enum" % "3.1"
     )
   )
 
@@ -84,6 +85,7 @@ lazy val `akka-http-client` = project.in(file("akka-http-client"))
     )
   ).dependsOn(algebra)
 
+
 lazy val `akka-http-server` = project.in(file("akka-http-server"))
   .settings(commonSettings)
   .settings(
@@ -93,12 +95,31 @@ lazy val `akka-http-server` = project.in(file("akka-http-server"))
     )
   ).dependsOn(algebra)
 
+
+lazy val swagger = project.in(file("swagger"))
+  .settings(commonSettings)
+  .settings(
+    name := "itinere-swagger",
+    libraryDependencies ++= Seq(
+      "org.typelevel" %% "cats-core" % "1.0.0-MF"
+    )
+  ).dependsOn(algebra)
+
+lazy val `swagger-circe` = project.in(file("swagger-circe"))
+  .settings(commonSettings)
+  .settings(
+    name := "itinere-swagger-circe",
+    libraryDependencies ++= Seq(
+      "io.circe" %% "circe-core" % "0.8.0"
+    )
+  ).dependsOn(swagger)
+
 lazy val example = project.in(file("example"))
   .settings(commonSettings)
-  .dependsOn(`json-argonaut`, `akka-http-client`, `akka-http-server`)
+  .dependsOn(`json-argonaut`, `akka-http-client`, `akka-http-server`, `swagger-circe`)
 
 lazy val root = (project in file("."))
-  .aggregate(algebra, `json-argonaut`, `akka-http-client`, `akka-http-server`)
+  .aggregate(algebra, `json-argonaut`, `akka-http-client`, `akka-http-server`, swagger, `swagger-circe`)
   .settings(
     aggregate in update := false
   )
