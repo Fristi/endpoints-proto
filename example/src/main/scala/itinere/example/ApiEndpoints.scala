@@ -5,9 +5,10 @@ import akka.http.scaladsl.Http
 import akka.http.scaladsl.model.{HttpRequest, HttpResponse, Uri}
 import akka.stream.ActorMaterializer
 import akka.stream.scaladsl.{Sink, Source}
+import io.circe.Printer
 import itinere._
 import itinere.client.{Client, ClientJson, ClientSettings}
-import itinere.swagger.{SwaggerApi, SwaggerGen, SwaggerGenJson}
+import itinere.swagger.{SwaggerApi, SwaggerApiInfo, SwaggerGen, SwaggerGenJson}
 import itinere.json.argonaut.ArgonautJsonCodec
 import itinere.server.{Server, ServerJson}
 import itinere.swagger.circe._
@@ -126,9 +127,9 @@ object DoclessApp extends App {
 
   val (manifest, operation) = t.listUsers.toReferenceTree.run
 
-  val api = SwaggerApi(List(operation), manifest, "/")
+  val api = SwaggerApi(SwaggerApiInfo("Simple API", "1.0.0", "A simple api"), List(operation), manifest, "/")
 
-  println(encoderSwaggerApi(api))
+  println(encoderSwaggerApi(api).pretty(new Printer(preserveOrder = true, dropNullKeys = true, "")))
 }
 
 object ClientApp extends App {

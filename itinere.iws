@@ -1,26 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="72deed5b-7f8e-4baf-a187-2cb22a9e7d28" name="Default" comment="Clean up">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/algebra/src/main/scala/itinere/JsonSchema.scala" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/swagger-circe/src/main/scala/itinere/swagger/circe/package.scala" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/Schema.scala" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/SwaggerGen.scala" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/SwaggerGenJson.scala" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/SwaggerGenRequest.scala" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/SwaggerGenResponse.scala" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/SwaggerGenUrls.scala" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/Types.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/akka-http-client/src/main/scala/itinere/client/ClientJson.scala" afterPath="$PROJECT_DIR$/akka-http-client/src/main/scala/itinere/client/ClientJson.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/akka-http-client/src/main/scala/itinere/client/ClientUrls.scala" afterPath="$PROJECT_DIR$/akka-http-client/src/main/scala/itinere/client/ClientUrls.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/akka-http-server/src/main/scala/itinere/server/ServerJson.scala" afterPath="$PROJECT_DIR$/akka-http-server/src/main/scala/itinere/server/ServerJson.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/akka-http-server/src/main/scala/itinere/server/ServerUrl.scala" afterPath="$PROJECT_DIR$/akka-http-server/src/main/scala/itinere/server/ServerUrl.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/algebra/src/main/scala/itinere/Algebra.scala" afterPath="$PROJECT_DIR$/algebra/src/main/scala/itinere/Algebra.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.sbt" afterPath="$PROJECT_DIR$/build.sbt" />
+    <list default="true" id="72deed5b-7f8e-4baf-a187-2cb22a9e7d28" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/example/src/main/scala/itinere/example/ApiEndpoints.scala" afterPath="$PROJECT_DIR$/example/src/main/scala/itinere/example/ApiEndpoints.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/example/src/main/scala/itinere/example/Domain.scala" afterPath="$PROJECT_DIR$/example/src/main/scala/itinere/example/Domain.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/itinere.ipr" afterPath="$PROJECT_DIR$/itinere.ipr" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/itinere.iws" afterPath="$PROJECT_DIR$/itinere.iws" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/swagger-circe/src/main/scala/itinere/swagger/circe/package.scala" afterPath="$PROJECT_DIR$/swagger-circe/src/main/scala/itinere/swagger/circe/package.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/SwaggerGenRequest.scala" afterPath="$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/SwaggerGenRequest.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/Types.scala" afterPath="$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/Types.scala" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -87,10 +73,11 @@
       <file leaf-file-name="ApiEndpoints.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/example/src/main/scala/itinere/example/ApiEndpoints.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="80">
-              <caret line="12" column="23" lean-forward="false" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
+            <state relative-caret-position="109">
+              <caret line="131" column="96" lean-forward="true" selection-start-line="131" selection-start-column="96" selection-end-line="131" selection-end-column="96" />
               <folding>
-                <marker date="1506418233000" expanded="true" signature="663:748" ph="{...}" />
+                <element signature="e#25#54#0" expanded="true" />
+                <marker date="1506424704000" expanded="true" signature="703:788" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -106,11 +93,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="package.scala" pinned="false" current-in-tab="true">
+      <file leaf-file-name="package.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/swagger-circe/src/main/scala/itinere/swagger/circe/package.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="403">
-              <caret line="77" column="79" lean-forward="false" selection-start-line="77" selection-start-column="79" selection-end-line="77" selection-end-column="79" />
+            <state relative-caret-position="218">
+              <caret line="85" column="49" lean-forward="false" selection-start-line="85" selection-start-column="49" selection-end-line="85" selection-end-column="49" />
               <folding>
                 <element signature="e#25#56#0" expanded="true" />
               </folding>
@@ -134,7 +121,7 @@
         <entry file="file://$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/Types.scala">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="88">
-              <caret line="90" column="11" lean-forward="false" selection-start-line="90" selection-start-column="11" selection-end-line="90" selection-end-column="11" />
+              <caret line="133" column="41" lean-forward="false" selection-start-line="133" selection-start-column="41" selection-end-line="133" selection-end-column="41" />
               <folding>
                 <element signature="e#25#48#0" expanded="true" />
               </folding>
@@ -142,11 +129,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SwaggerGenRequest.scala" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SwaggerGenRequest.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/SwaggerGenRequest.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="25" column="18" lean-forward="false" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
+            <state relative-caret-position="439">
+              <caret line="30" column="184" lean-forward="false" selection-start-line="30" selection-start-column="184" selection-end-line="30" selection-end-column="184" />
               <folding />
             </state>
           </provider>
@@ -201,6 +188,8 @@
       <find>SwaggerPath</find>
       <find>extends SwaggerFormat</find>
       <find>extends In</find>
+      <find>schema</find>
+      <find>description</find>
     </findStrings>
     <replaceStrings>
       <replace>Resp</replace>
@@ -262,14 +251,14 @@
         <option value="$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/SwaggerGenJson.scala" />
         <option value="$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/Schema.scala" />
         <option value="$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/SwaggerGen.scala" />
-        <option value="$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/SwaggerGenRequest.scala" />
         <option value="$PROJECT_DIR$/example/src/main/scala/itinere/example/Domain.scala" />
         <option value="$PROJECT_DIR$/algebra/src/main/scala/itinere/Algebra.scala" />
-        <option value="$PROJECT_DIR$/example/src/main/scala/itinere/example/ApiEndpoints.scala" />
         <option value="$PROJECT_DIR$/build.sbt" />
         <option value="$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/SwaggerGenUrls.scala" />
         <option value="$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/Types.scala" />
+        <option value="$PROJECT_DIR$/example/src/main/scala/itinere/example/ApiEndpoints.scala" />
         <option value="$PROJECT_DIR$/swagger-circe/src/main/scala/itinere/swagger/circe/package.scala" />
+        <option value="$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/SwaggerGenRequest.scala" />
       </list>
     </option>
   </component>
@@ -734,12 +723,18 @@
       <option name="project" value="LOCAL" />
       <updated>1504353834669</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="WIP Swagger">
+      <created>1506419240571</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1506419240571</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="794" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -750,7 +745,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.583691" sideWeight="0.5028612" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.55078685" sideWeight="0.49713877" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.55078685" sideWeight="0.49713877" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -818,7 +813,8 @@
     <MESSAGE value="Split into modules" />
     <MESSAGE value="CoproductHttpResponseBuilder" />
     <MESSAGE value="Clean up" />
-    <option name="LAST_COMMIT_MESSAGE" value="Clean up" />
+    <MESSAGE value="WIP Swagger" />
+    <option name="LAST_COMMIT_MESSAGE" value="WIP Swagger" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -827,13 +823,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$USER_HOME$/.ivy2/cache/com.timeout/docless_2.12/srcs/docless_2.12-0.5.0-sources.jar!/com/timeout/docless/swagger/SecurityRequirement.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/akka-http-server/src/main/scala/itinere/server/ServerUrl.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
@@ -1183,16 +1172,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/example/src/main/scala/itinere/example/ApiEndpoints.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="12" column="23" lean-forward="false" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
-          <folding>
-            <marker date="1506418233000" expanded="true" signature="663:748" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/build.sbt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="469">
@@ -1211,31 +1190,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/SwaggerGenRequest.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="25" column="18" lean-forward="false" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/Types.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
-          <caret line="90" column="11" lean-forward="false" selection-start-line="90" selection-start-column="11" selection-end-line="90" selection-end-column="11" />
+          <caret line="133" column="41" lean-forward="false" selection-start-line="133" selection-start-column="41" selection-end-line="133" selection-end-column="41" />
           <folding>
             <element signature="e#25#48#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="jar://$USER_HOME$/.ivy2/cache/io.circe/circe-core_2.12/srcs/circe-core_2.12-0.8.0-sources.jar!/io/circe/Printer.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="87">
+          <caret line="33" column="24" lean-forward="false" selection-start-line="33" selection-start-column="24" selection-end-line="33" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/src/main/scala/itinere/example/ApiEndpoints.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="109">
+          <caret line="131" column="96" lean-forward="true" selection-start-line="131" selection-start-column="96" selection-end-line="131" selection-end-column="96" />
+          <folding>
+            <element signature="e#25#54#0" expanded="true" />
+            <marker date="1506424704000" expanded="true" signature="703:788" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/swagger-circe/src/main/scala/itinere/swagger/circe/package.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="403">
-          <caret line="77" column="79" lean-forward="false" selection-start-line="77" selection-start-column="79" selection-end-line="77" selection-end-column="79" />
+        <state relative-caret-position="218">
+          <caret line="85" column="49" lean-forward="false" selection-start-line="85" selection-start-column="49" selection-end-line="85" selection-end-column="49" />
           <folding>
             <element signature="e#25#56#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/swagger/src/main/scala/itinere/swagger/SwaggerGenRequest.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="439">
+          <caret line="30" column="184" lean-forward="false" selection-start-line="30" selection-start-column="184" selection-end-line="30" selection-end-column="184" />
+          <folding />
         </state>
       </provider>
     </entry>

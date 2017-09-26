@@ -73,15 +73,18 @@ package object circe {
 
     def encoderGeneric(a: SwaggerParameter.Generic): Json = Json.obj(
       "name" -> Json.fromString(a.name),
-      "type" -> encoderSwaggerType(a.`type`),
       "in" -> encoderSwaggerParameterIn(a.in),
-      "description" -> a.description.fold(Json.fromString(""))(Json.fromString)
+      "description" -> a.description.fold(Json.Null)(Json.fromString),
+      "required" -> Json.fromBoolean(a.required),
+      "type" -> encoderSwaggerType(a.`type`),
+      "format" -> a.format.fold(Json.Null)(encoderSwaggerFormat.apply)
     )
 
     def encodeBody(a: SwaggerParameter.Body): Json = Json.obj(
       "name" -> Json.fromString(a.name),
-      "required" -> Json.fromBoolean(a.required),
+      "in" -> Json.fromString("body"),
       "description" -> a.description.fold(Json.fromString(""))(Json.fromString),
+      "required" -> Json.fromBoolean(a.required),
       "schema" -> a.schema.fold(Json.Null)(schemaToJson)
     )
 
@@ -94,7 +97,7 @@ package object circe {
   implicit val encoderSwaggerHeader = new Encoder[SwaggerHeader] {
     override def apply(a: SwaggerHeader): Json = Json.obj(
       "type" -> encoderSwaggerType(a.`type`),
-      "description" -> a.description.fold(Json.fromString(""))(Json.fromString),
+      "description" -> a.description.fold(Json.Null)(Json.fromString),
       "format" -> a.format.fold(Json.Null)(encoderSwaggerFormat.apply)
     )
   }
@@ -111,9 +114,17 @@ package object circe {
     override def apply(a: SwaggerOperation): Json = Json.obj(
       "produces" -> Json.arr(Json.fromString("application/json")),
       "parameters" -> Json.arr((a.path.parameters ++ a.parameters).map(encoderSwaggerParameter.apply) : _*),
-      "description" -> a.description.fold(Json.fromString(""))(Json.fromString),
+      "description" -> a.description.fold(Json.Null)(Json.fromString),
       "responses" ->
         Json.obj(a.responses.byStatusCode.toList.map { case (code, response) => code.toString -> encoderSwaggerResponse(response) } : _*)
+    )
+  }
+
+  implicit val encoderSwaggerApiInfo = new Encoder[SwaggerApiInfo] {
+    override def apply(a: SwaggerApiInfo): Json = Json.obj(
+      "title" -> Json.fromString(a.title),
+      "version" -> Json.fromString(a.version),
+      "description" -> Json.fromString(a.description),
     )
   }
 
@@ -121,10 +132,13 @@ package object circe {
     override def apply(a: SwaggerApi): Json = Json.obj(
       "swagger" -> Json.fromString("2.0"),
       "basePath" -> Json.fromString(a.basePath),
+      "info" -> encoderSwaggerApiInfo(a.info),
       "definitions" -> encoderSchemaManifest(a.definitions),
       "paths" -> Json.obj(a.operations.groupBy(_.path.id).toList.map { case (path, operations) =>
         path -> Json.obj(operations.map(op => op.method.method -> encoderSwaggerOperation(op)): _*)
       } : _*)
     )
   }
+
+
 }
