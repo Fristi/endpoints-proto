@@ -119,9 +119,9 @@ object ServerApp extends App {
 
 object DoclessApp extends App {
 
-  class DoclessTest extends SwaggerGen with ApiEndpoints with SwaggerGenJson
+  class SwaggerTest extends SwaggerGen with SwaggerGenJson with ApiEndpoints
 
-  val t = new DoclessTest
+  val t = new SwaggerTest
 
 //  println(t.listUsers)
 

@@ -117,20 +117,6 @@ case class SwaggerOperation(method: SwaggerMethod,
   }
 }
 
-
-//"info": {
-//"version": "1.0.0",
-//"title": "Swagger Petstore",
-//"description": "A sample API that uses a petstore as an example to demonstrate features in the swagger-2.0 specification",
-//"termsOfService": "http://swagger.io/terms/",
-//"contact": {
-//"name": "Swagger API Team"
-//},
-//"license": {
-//"name": "MIT"
-//}
-//},
-
 case class SwaggerApiInfo(title: String, version: String, description: String)
 case class SwaggerApi(info: SwaggerApiInfo, operations: List[SwaggerOperation], definitions: SchemaManifest, basePath: String)
 
