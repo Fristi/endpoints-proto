@@ -76,6 +76,16 @@ lazy val `json-argonaut` = project.in(file("json-argonaut"))
     )
   ).dependsOn(algebra)
 
+lazy val `json-circe` = project.in(file("json-circe"))
+  .settings(commonSettings)
+  .settings(
+    name := "itinere-json-circe",
+    libraryDependencies ++= Seq(
+      "io.circe" %% "circe-core" % "0.8.0",
+      "io.circe" %% "circe-parser" % "0.8.0"
+    )
+  ).dependsOn(algebra)
+
 lazy val `akka-http-client` = project.in(file("akka-http-client"))
   .settings(commonSettings)
   .settings(
@@ -116,10 +126,11 @@ lazy val `swagger-circe` = project.in(file("swagger-circe"))
 
 lazy val example = project.in(file("example"))
   .settings(commonSettings)
-  .dependsOn(`json-argonaut`, `akka-http-client`, `akka-http-server`, `swagger-circe`)
+  .settings(libraryDependencies += "io.circe" %% "circe-generic" % "0.8.0")
+  .dependsOn(`json-circe`, `akka-http-client`, `akka-http-server`, `swagger-circe`)
 
 lazy val root = (project in file("."))
-  .aggregate(algebra, `json-argonaut`, `akka-http-client`, `akka-http-server`, swagger, `swagger-circe`)
+  .aggregate(algebra, `json-argonaut`, `json-circe`, `akka-http-client`, `akka-http-server`, swagger, `swagger-circe`)
   .settings(
     aggregate in update := false
   )

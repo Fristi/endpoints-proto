@@ -98,6 +98,9 @@ object JsonSchema extends LowerPrioJsonSchema1 {
   implicit def list[A : JsonSchema]: JsonSchema[List[A]] =
     JsonSchema[List[A]](Schema.Array(unboundedLength, false, implicitly[JsonSchema[A]].schema))
 
+  implicit def seq[A : JsonSchema]: JsonSchema[Seq[A]] =
+    JsonSchema[Seq[A]](Schema.Array(unboundedLength, false, implicitly[JsonSchema[A]].schema))
+
   implicit def set[A : JsonSchema]: JsonSchema[Set[A]] =
     JsonSchema[Set[A]](Schema.Array(unboundedLength, true, implicitly[JsonSchema[A]].schema))
 
