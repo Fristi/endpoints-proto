@@ -127,6 +127,7 @@ lazy val `swagger-circe` = project.in(file("swagger-circe"))
 lazy val example = project.in(file("example"))
   .settings(commonSettings)
   .settings(libraryDependencies += "io.circe" %% "circe-generic" % "0.8.0")
+  .settings(libraryDependencies += "org.webjars" % "swagger-ui" % "3.0.18")
   .dependsOn(`json-circe`, `akka-http-client`, `akka-http-server`, `swagger-circe`)
 
 lazy val root = (project in file("."))
