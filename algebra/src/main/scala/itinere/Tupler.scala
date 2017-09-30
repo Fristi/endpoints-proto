@@ -1,7 +1,7 @@
 package itinere
 
 import shapeless._
-import shapeless.ops.hlist.Prepend
+import shapeless.ops.hlist.{Prepend, Split}
 
 trait Tupler[A, B] {
   type Out <: HList
@@ -31,11 +31,15 @@ trait Tupler1 extends Tupler0 {
       override def unapply(out: ::[A, B]): (A, B) = out.head -> out.tail
     }
 
-  implicit def right[A <: HList, B](implicit P: Prepend[A, B :: HNil]): Aux[A, B, P.Out] =
+  implicit def right[A <: HList, B, C <: HList, N <: Nat](implicit P: Prepend.Aux[A, B :: HNil, C], S: Split.Aux[C, N, A, B :: HNil]): Aux[A, B, C] =
     new Tupler[A, B] {
-      type Out = P.Out
+      type Out = C
       def apply(a: A, b: B): P.Out = P.apply(a, b :: HNil)
-      override def unapply(out: P.Out): (A, B) = ???
+      override def unapply(out: C): (A, B) = {
+        val s = S(out)
+
+        s._1 -> s._2.head
+      }
     }
 
 }

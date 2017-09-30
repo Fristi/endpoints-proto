@@ -8,6 +8,17 @@ trait SwaggerGenRequest extends HttpRequestAlgebra with SwaggerGenUrls {
   override type HttpRequestEntity[A] = Option[SwaggerParameter.Body]
   override type HttpRequest[A] = SwaggerOperation
   override type HttpMethod = SwaggerMethod
+  override type HttpRequestHeaderValue[A] = SwaggerType
+
+  override implicit def stringRequestHeader: SwaggerType = SwaggerType.String
+
+  override def requestHeader[A](name: String)(implicit V: SwaggerType): (List[SwaggerParameter]) => List[SwaggerParameter] =
+    headers => headers :+ SwaggerParameter.Generic(name, SwaggerParameter.In.Header, true, None, V)
+
+  override def combineRequestHeaders[A, B](
+    left: (List[SwaggerParameter]) => List[SwaggerParameter],
+    right: (List[SwaggerParameter]) => List[SwaggerParameter])(implicit T: Tupler[A, B]): (List[SwaggerParameter]) => List[SwaggerParameter] =
+    headers => left(right(headers))
 
   override def emptyRequestHeaders: (List[SwaggerParameter]) => List[SwaggerParameter] = headers => headers
   override def emptyRequestEntity: Option[SwaggerParameter.Body] = None
@@ -23,7 +34,7 @@ trait SwaggerGenRequest extends HttpRequestAlgebra with SwaggerGenUrls {
     url: SwaggerPath,
     headers: (List[SwaggerParameter]) => List[SwaggerParameter],
     entity: Option[SwaggerParameter.Body])(implicit T: Tupler.Aux[A, B, AB], TO: Tupler[AB, C]): SwaggerOperation =
-    SwaggerOperation(method, url, parameters = entity.toList)
+    SwaggerOperation(method, url, parameters = headers(entity.toList))
 
   override implicit val httpRequestHeadersInvariantFunctor: InvariantFunctor[Lambda[A => List[SwaggerParameter] => List[SwaggerParameter]]] = new InvariantFunctor[Lambda[A => List[SwaggerParameter] => List[SwaggerParameter]]] {
     override def imap[A, B](fa: (List[SwaggerParameter]) => List[SwaggerParameter])(f: (A) => B)(g: (B) => A): (List[SwaggerParameter]) => List[SwaggerParameter] = headers => fa(headers)
@@ -34,5 +45,7 @@ trait SwaggerGenRequest extends HttpRequestAlgebra with SwaggerGenUrls {
   override implicit val httpRequestInvariantFunctor: InvariantFunctor[Lambda[A => SwaggerOperation]] = new InvariantFunctor[Lambda[A => SwaggerOperation]] {
     override def imap[A, B](fa: SwaggerOperation)(f: (A) => B)(g: (B) => A): SwaggerOperation = fa
   }
-
+  override implicit val httpRequestHeaderInvariantFunctor: InvariantFunctor[Lambda[A => SwaggerType]] = new InvariantFunctor[Lambda[A => SwaggerType]] {
+    override def imap[A, B](fa: SwaggerType)(f: (A) => B)(g: (B) => A): SwaggerType = fa
+  }
 }

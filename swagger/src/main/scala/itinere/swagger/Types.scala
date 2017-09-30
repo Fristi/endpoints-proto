@@ -113,7 +113,13 @@ case class SwaggerOperation(method: SwaggerMethod,
     for {
       b <- referenceSchemaBodyParam
       r <- referenceSchemaResponse
-    } yield copy(responses = r, parameters = b)
+    } yield copy(
+      responses = r,
+      parameters = parameters.filter {
+        case _ : SwaggerParameter.Body => false
+        case _ : SwaggerParameter.Generic => true
+      } ++ b
+    )
   }
 }
 

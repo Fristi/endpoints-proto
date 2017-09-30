@@ -2,6 +2,7 @@ package itinere.client
 
 import akka.http.scaladsl.model
 import akka.http.scaladsl.model.{HttpMethods, Uri, HttpHeader => Header, HttpRequest => Req, HttpResponse => Resp}
+import akka.http.scaladsl.model.headers.RawHeader
 import itinere.{HttpRequestAlgebra, InvariantFunctor, Tupler}
 import shapeless.HNil
 
@@ -12,8 +13,22 @@ trait ClientRequest extends HttpRequestAlgebra with ClientUrls {
   override type HttpRequestHeaders[A] = (A, List[Header]) => List[Header]
   override type HttpRequestEntity[A] = (A, Req) => Req
   override type HttpRequest[A] = A => Future[Resp]
-
+  override type HttpRequestHeaderValue[A] = A => String
   override type HttpMethod = Req => Req
+
+  override def requestHeader[A](name: String)(implicit V: HttpRequestHeaderValue[A]): (A, List[Header]) => List[Header] =
+    (a,headers) => headers :+ RawHeader(name, V(a))
+
+
+  override implicit def stringRequestHeader: (String) => String = str => str
+
+  override def combineRequestHeaders[A, B](
+    left: (A, List[Header]) => List[Header],
+    right: (B, List[Header]) => List[Header])(implicit T: Tupler[A, B]): (T.Out, List[Header]) => List[Header] = (out, headers) => {
+    val (a, b) = T.unapply(out)
+
+    right(b, left(a, headers))
+  }
 
   override def GET: (model.HttpRequest) => model.HttpRequest = _.withMethod(HttpMethods.GET)
 
@@ -37,6 +52,10 @@ trait ClientRequest extends HttpRequestAlgebra with ClientUrls {
   }
   override implicit val httpRequestInvariantFunctor: InvariantFunctor[Function[?, Future[Resp]]] = new InvariantFunctor[Function[?, Future[Resp]]] {
     override def imap[A, B](fa: Function[A, Future[Resp]])(f: (A) => B)(g: (B) => A): Function[B, Future[Resp]] = (b) => fa(g(b))
+  }
+
+  override implicit val httpRequestHeaderInvariantFunctor: InvariantFunctor[Lambda[A => Function[A, String]]] = new InvariantFunctor[Lambda[A => Function[A, String]]] {
+    override def imap[A, B](fa: Function[A, String])(f: (A) => B)(g: (B) => A): Function[B, String] = a => fa(g(a))
   }
 
   override def request[A, B, C, AB](method: (Req) => Req, url: Url[A], headers: (B, List[Header]) => List[Header], entity: (C, Req) => Req)

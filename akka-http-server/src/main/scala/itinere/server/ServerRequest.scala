@@ -2,7 +2,7 @@ package itinere.server
 
 import akka.http.scaladsl.model.{HttpMethods, HttpMethod => Method}
 import akka.http.scaladsl.server.Directives._
-import akka.http.scaladsl.server.{Directive1, Directives}
+import akka.http.scaladsl.server.{Directive1, Directives, MalformedHeaderRejection}
 import akka.stream.Materializer
 import itinere.{HttpRequestAlgebra, InvariantFunctor, Tupler}
 import shapeless._
@@ -17,6 +17,8 @@ trait ServerRequest extends HttpRequestAlgebra with ServerUrl {
   override type HttpRequestHeaders[A] = Directive1[A]
   override type HttpRequestEntity[A] = Directive1[A]
   override type HttpRequest[A] = Directive1[A]
+
+  override type HttpRequestHeaderValue[A] = String => Either[String, A]
   override type HttpMethod = Method
 
   override def GET = HttpMethods.GET
@@ -28,6 +30,14 @@ trait ServerRequest extends HttpRequestAlgebra with ServerUrl {
   override def DELETE = HttpMethods.DELETE
 
   override def PATCH = HttpMethods.PATCH
+
+  override def requestHeader[A](name: String)(implicit V: (String) => Either[String, A]): Directive1[A] =
+    headerValueByName(name).flatMap(h => V(h).fold(err => reject(MalformedHeaderRejection(name, err)), provide))
+
+  override implicit def stringRequestHeader: (String) => Either[String, String] = str => Right(str)
+
+  override def combineRequestHeaders[A, B](left: Directive1[A], right: Directive1[B])(implicit T: Tupler[A, B]): Directive1[T.Out] =
+    joinDirectives(left, right)
 
   override def request[A, B, C, AB](method: Method, url: Url[A], headers: Directive1[B], entity: Directive1[C])
                                    (implicit T: Tupler.Aux[A, B, AB], TO: Tupler[AB, C]): Directive1[TO.Out] = {
@@ -49,6 +59,9 @@ trait ServerRequest extends HttpRequestAlgebra with ServerUrl {
   override implicit val httpRequestHeadersInvariantFunctor: InvariantFunctor[Directive1] = directiveFunctor
   override implicit val httpRequestEntityInvariantFunctor: InvariantFunctor[Directive1] = directiveFunctor
   override implicit val httpRequestInvariantFunctor: InvariantFunctor[Directive1] = directiveFunctor
+  override implicit val httpRequestHeaderInvariantFunctor: InvariantFunctor[Lambda[A => Function[String, Either[String, A]]]] = new InvariantFunctor[Lambda[A => Function[String, Either[String, A]]]] {
+    override def imap[A, B](fa: Function[String, Either[String, A]])(f: (A) => B)(g: (B) => A): Function[String, Either[String, B]] = str => fa(str).map(f)
+  }
 }
 
 

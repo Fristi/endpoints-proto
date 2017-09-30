@@ -33,7 +33,7 @@ trait ApiEndpoints extends HttpEndpointAlgebra with HttpJsonAlgebra with CirceJs
   )
 
   def addUser: Endpoint[AddUserRequest, DomainResponse[User]] = endpoint(
-    request(POST, path / "users", entity = jsonRequest[User]).as[AddUserRequest],
+    request(POST, path / "users", headers = requestHeader[String]("X-Content-Type") ~ requestHeader[String]("X-Real-IP"), entity = jsonRequest[User]).as[AddUserRequest],
     domainResponse[User]
   )
 }
@@ -42,7 +42,6 @@ object ServerApp extends App {
 
   implicit val system = ActorSystem("my-system")
   implicit val materializer = ActorMaterializer()
-  // needed for the future flatMap/onComplete in the end
   implicit val executionContext = system.dispatcher
 
   val gen = new SwaggerGen with SwaggerGenJson with ApiEndpoints
@@ -54,6 +53,7 @@ object ServerApp extends App {
       case r if r.kind.contains("badRequest") => Future.successful(BadRequest(Error("badRequest")))
       case _ => Future.successful(Success(List(User("mark", 223), User("julien", 2323))))
     } ~ addUser.implementedByAsync { req =>
+      println(req)
       Future.successful(Success(req.user))
     }
   }
@@ -101,5 +101,6 @@ object ClientApp extends App {
   println(Await.result(HttpClient.listUsers(ListUserRequest(Some("badRequest"))), 2.seconds))
   println(Await.result(HttpClient.listUsers(ListUserRequest(Some("notFound"))), 2.seconds))
   println(Await.result(HttpClient.listUsers(ListUserRequest(None)), 2.seconds))
+  println(Await.result(HttpClient.addUser(AddUserRequest("application/json", "127.0.0.1", User("mark", 2323))), 2.seconds))
 
 }
