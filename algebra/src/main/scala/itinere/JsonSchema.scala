@@ -63,6 +63,7 @@ trait JsonSchema[A] {
   def schema: Schema
 }
 
+
 trait LowerPrioJsonSchema1 {
   protected def unbounded = Bound(None, None)
   protected def unboundedLength = LengthBound(None, None)
@@ -89,6 +90,10 @@ trait LowerPrioJsonSchema1 {
 object JsonSchema extends LowerPrioJsonSchema1 {
   def apply[A](s: Schema) = new JsonSchema[A] {
     override def schema: Schema = s
+  }
+
+  def by[A, B](f: B => A)(implicit C: JsonSchema[A]): JsonSchema[B] = new JsonSchema[B] {
+    override def schema: Schema = C.schema
   }
 
   implicit def labels[E : Enum]: JsonSchema[E] = new JsonSchema[E] {

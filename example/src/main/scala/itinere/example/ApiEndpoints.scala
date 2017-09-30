@@ -48,12 +48,13 @@ object ServerApp extends App {
   val gen = new SwaggerGen with SwaggerGenJson with ApiEndpoints
   val api = gen.api(SwaggerApiInfo("Simple API", "1.0.0", "A simple api"), "/")(gen.listUsers, gen.addUser)
 
-
   object ServerImpl extends Server with ApiEndpoints with ServerJson {
     val routes = listUsers.implementedByAsync {
       case r if r.kind.contains("notFound") => Future.successful(NotFound(Error("notFound")))
       case r if r.kind.contains("badRequest") => Future.successful(BadRequest(Error("badRequest")))
       case _ => Future.successful(Success(List(User("mark", 223), User("julien", 2323))))
+    } ~ addUser.implementedByAsync { req =>
+      Future.successful(Success(req.user))
     }
   }
 
@@ -71,12 +72,7 @@ object ServerApp extends App {
     }
   }
 
-
-
-
   val bindingFuture = Http().bindAndHandle(ServerImpl.routes ~ swagger, "localhost", 8080)
-
-
 }
 
 object ClientApp extends App {
