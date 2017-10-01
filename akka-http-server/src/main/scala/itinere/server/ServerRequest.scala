@@ -8,6 +8,7 @@ import itinere.{HttpRequestAlgebra, InvariantFunctor, Tupler}
 import shapeless._
 
 import scala.concurrent.ExecutionContext
+import scala.util.Try
 
 trait ServerRequest extends HttpRequestAlgebra with ServerUrl {
 
@@ -31,10 +32,12 @@ trait ServerRequest extends HttpRequestAlgebra with ServerUrl {
 
   override def PATCH = HttpMethods.PATCH
 
-  override def requestHeader[A](name: String)(implicit V: (String) => Either[String, A]): Directive1[A] =
+  override def requestHeader[A](name: String, description: Option[String] = None)(implicit V: (String) => Either[String, A]): Directive1[A] =
     headerValueByName(name).flatMap(h => V(h).fold(err => reject(MalformedHeaderRejection(name, err)), provide))
 
   override implicit def stringRequestHeader: (String) => Either[String, String] = str => Right(str)
+
+  override implicit def intRequestHeader: (String) => Either[String, Int] = str => Try(str.toInt).fold(err => Left(err.getMessage), Right.apply)
 
   override def combineRequestHeaders[A, B](left: Directive1[A], right: Directive1[B])(implicit T: Tupler[A, B]): Directive1[T.Out] =
     joinDirectives(left, right)

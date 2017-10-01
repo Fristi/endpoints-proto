@@ -22,19 +22,27 @@ trait ApiEndpoints extends HttpEndpointAlgebra with HttpJsonAlgebra with CirceJs
 
   def domainResponse[A](implicit E: JsonCodec[A], S: JsonSchema[A]): HttpResponse[DomainResponse[A]] =
     coproductResponseBuilder
-      .add(response(404, entity = jsonResponse[Error]).as[NotFound])
-      .add(response(200, entity = jsonResponse[A]).as[Success[A]])
-      .add(response(400, entity = jsonResponse[Error]).as[BadRequest])
+      .add(response(404, entity = jsonResponse[Error](Some("Returned when a entity is not found"))).as[NotFound])
+      .add(response(200, entity = jsonResponse[A](Some("Returned when everything is fine"))).as[Success[A]])
+      .add(response(400, entity = jsonResponse[Error](Some("Returned when the user has provided a bad request"))).as[BadRequest])
       .as[DomainResponse[A]]
 
   def listUsers: Endpoint[ListUserRequest, DomainResponse[List[User]]] = endpoint(
-    request(GET, path / "users" /? optQs[String]("kind")).as[ListUserRequest],
-    domainResponse[List[User]]
+    request = request(GET, path / "users" /? optQs[String]("kind", Some("The kind of user to filter"))).as[ListUserRequest],
+    response = domainResponse[List[User]],
+    description = Some("This endpoint will list users")
   )
 
   def addUser: Endpoint[AddUserRequest, DomainResponse[User]] = endpoint(
-    request(POST, path / "users", headers = requestHeader[String]("X-Content-Type") ~ requestHeader[String]("X-Real-IP"), entity = jsonRequest[User]).as[AddUserRequest],
-    domainResponse[User]
+    request = request(POST, path / "users",
+      headers =
+        requestHeader[String]("X-Content-Type", Some("The content type")) ~
+        requestHeader[String]("X-Real-IP", Some("The ip address")) ~
+        requestHeader[Int]("X-Age", Some("The age of the request")),
+      entity = jsonRequest[User](Some("The user to add"))
+    ).as[AddUserRequest],
+    response = domainResponse[User],
+    description = Some("This endpoint will add a user")
   )
 }
 
@@ -101,6 +109,6 @@ object ClientApp extends App {
   println(Await.result(HttpClient.listUsers(ListUserRequest(Some("badRequest"))), 2.seconds))
   println(Await.result(HttpClient.listUsers(ListUserRequest(Some("notFound"))), 2.seconds))
   println(Await.result(HttpClient.listUsers(ListUserRequest(None)), 2.seconds))
-  println(Await.result(HttpClient.addUser(AddUserRequest("application/json", "127.0.0.1", User("mark", 2323))), 2.seconds))
+  println(Await.result(HttpClient.addUser(AddUserRequest("application/json", "127.0.0.1", 3, User("mark", 2323))), 2.seconds))
 
 }

@@ -21,7 +21,7 @@ abstract class Client(val settings: ClientSettings)(implicit val ec: ExecutionCo
     with ClientResponse {
   override type Endpoint[A, B] = A => Future[B]
 
-  def endpoint[A, B](request: Request[A], response: Response[B]): Endpoint[A, B] =
+  def endpoint[A, B](request: Request[A], response: Response[B], description: Option[String] = None): Endpoint[A, B] =
     a =>
       for {
         resp <- request(a)

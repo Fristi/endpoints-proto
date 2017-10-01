@@ -11,15 +11,15 @@ trait SwaggerGenUrls extends UrlAlgebra {
 
   override def combineQueryStrings[A, B](first: List[SwaggerParameter], second: List[SwaggerParameter])(implicit tupler: Tupler[A, B]): List[SwaggerParameter] = first ++ second
 
-  override def qs[A](name: String)(implicit value: SwaggerType): List[SwaggerParameter] =
-    List(SwaggerParameter.query(name = name, required = true, `type` = value))
+  override def qs[A](name: String, description: Option[String] = None)(implicit value: SwaggerType): List[SwaggerParameter] =
+    List(SwaggerParameter.query(name = name, required = true, `type` = value, description = description))
 
   override implicit def stringQueryString: SwaggerType = SwaggerType.String
   override implicit def intQueryString: SwaggerType = SwaggerType.Integer
   override implicit def longQueryString: SwaggerType = SwaggerType.Integer
 
-  override def optQs[A](name: String)(implicit value: SwaggerType): List[SwaggerParameter] =
-    List(SwaggerParameter.query(name = name, required = false, `type` = value))
+  override def optQs[A](name: String, description: Option[String] = None)(implicit value: SwaggerType): List[SwaggerParameter] =
+    List(SwaggerParameter.query(name = name, required = false, `type` = value, description = description))
 
   override implicit def stringSegment: SwaggerType = SwaggerType.String
 

@@ -10,10 +10,10 @@ import scala.concurrent.duration._
 
 trait ServerJson extends HttpJsonAlgebra { self: Server with WithJsonCodec =>
 
-  override def jsonResponse[A: JsonCodec : JsonSchema]: HttpResponseEntity[A] = (x, resp) =>
+  override def jsonResponse[A: JsonCodec : JsonSchema](description: Option[String] = None): HttpResponseEntity[A] = (x, resp) =>
     resp.withEntity(ContentTypes.`application/json`, implicitly[JsonCodec[A]].encode(x))
 
-  override def jsonRequest[A: JsonCodec : JsonSchema]: Directive1[A] = extractRequest.flatMap { r =>
+  override def jsonRequest[A: JsonCodec : JsonSchema](description: Option[String] = None): Directive1[A] = extractRequest.flatMap { r =>
 
     def extractJson = for {
       strictEntity <- r.entity.toStrict(2.seconds)

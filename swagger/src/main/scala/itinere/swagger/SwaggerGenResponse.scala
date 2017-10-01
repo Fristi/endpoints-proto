@@ -10,7 +10,7 @@ trait SwaggerGenResponse extends HttpResponseAlgebra {
 
 
   override def emptyResponseHeaders: (List[SwaggerParameter]) => List[SwaggerParameter] = headers => headers
-  override def emptyResponse: SwaggerResponse = SwaggerResponse("empty response")
+  override def emptyResponse: SwaggerResponse = SwaggerResponse(description = None, headers = Map.empty, schema = None, example = None)
   override def cnil: SwaggerResponses = SwaggerResponses(Map.empty)
 
   override def response[A, B](statusCode: Int, headers: (List[SwaggerParameter]) => List[SwaggerParameter], entity: SwaggerResponse)(implicit T: Tupler[A, B]): SwaggerResponses =

@@ -12,8 +12,10 @@ trait SwaggerGenRequest extends HttpRequestAlgebra with SwaggerGenUrls {
 
   override implicit def stringRequestHeader: SwaggerType = SwaggerType.String
 
-  override def requestHeader[A](name: String)(implicit V: SwaggerType): (List[SwaggerParameter]) => List[SwaggerParameter] =
-    headers => headers :+ SwaggerParameter.Generic(name, SwaggerParameter.In.Header, true, None, V)
+  override implicit def intRequestHeader: SwaggerType = SwaggerType.Integer
+
+  override def requestHeader[A](name: String, description: Option[String] = None)(implicit V: SwaggerType): (List[SwaggerParameter]) => List[SwaggerParameter] =
+    headers => headers :+ SwaggerParameter.Generic(name = name, in = SwaggerParameter.In.Header, required = true, description = description, `type` = V)
 
   override def combineRequestHeaders[A, B](
     left: (List[SwaggerParameter]) => List[SwaggerParameter],

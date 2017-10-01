@@ -127,7 +127,7 @@ case class SwaggerApiInfo(title: String, version: String, description: String)
 case class SwaggerApi(info: SwaggerApiInfo, operations: List[SwaggerOperation], definitions: SchemaManifest, basePath: String)
 
 
-case class SwaggerResponse(description: String,
+case class SwaggerResponse(description: Option[String],
                            headers: Map[String, SwaggerHeader] = Map.empty,
                            schema: Option[Schema] = None,
                            example: Option[String] = None)

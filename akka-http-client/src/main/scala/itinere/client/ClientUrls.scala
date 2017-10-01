@@ -26,10 +26,10 @@ trait ClientUrls extends UrlAlgebra {
       }
     }
 
-  def qs[A](name: String)(implicit value: QueryStringParam[A]): QueryString[A] =
+  def qs[A](name: String, description: Option[String] = None)(implicit value: QueryStringParam[A]): QueryString[A] =
     a => Some(s"$name=${value.apply(a)}")
 
-  def optQs[A](name: String)(implicit value: QueryStringParam[A]): QueryString[Option[A]] = {
+  def optQs[A](name: String, description: Option[String] = None)(implicit value: QueryStringParam[A]): QueryString[Option[A]] = {
     case Some(a) => qs[A](name).encodeQueryString(a)
     case None => None
   }

@@ -33,11 +33,11 @@ trait ServerUrl extends UrlAlgebra {
 
   implicit def longQueryString: QueryStringParam[Long] = PredefinedFromStringUnmarshallers.longFromStringUnmarshaller
 
-  def qs[A](name: String)(implicit value: QueryStringParam[A]): QueryString[A] = {
+  def qs[A](name: String, description: Option[String] = None)(implicit value: QueryStringParam[A]): QueryString[A] = {
     new QueryString[A](parameter(name.as[A]))
   }
 
-  def optQs[A](name: String)(implicit value: QueryStringParam[A]): QueryString[Option[A]] = {
+  def optQs[A](name: String, description: Option[String] = None)(implicit value: QueryStringParam[A]): QueryString[Option[A]] = {
     new QueryString[Option[A]](parameter(name.as[A].?))
   }
 

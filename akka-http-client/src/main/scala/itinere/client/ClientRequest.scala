@@ -16,11 +16,12 @@ trait ClientRequest extends HttpRequestAlgebra with ClientUrls {
   override type HttpRequestHeaderValue[A] = A => String
   override type HttpMethod = Req => Req
 
-  override def requestHeader[A](name: String)(implicit V: HttpRequestHeaderValue[A]): (A, List[Header]) => List[Header] =
+  override def requestHeader[A](name: String, description: Option[String] = None)(implicit V: HttpRequestHeaderValue[A]): (A, List[Header]) => List[Header] =
     (a,headers) => headers :+ RawHeader(name, V(a))
 
 
-  override implicit def stringRequestHeader: (String) => String = str => str
+  override implicit def stringRequestHeader: (String) => String = identity
+  override implicit def intRequestHeader: (Int) => String = _.toString
 
   override def combineRequestHeaders[A, B](
     left: (A, List[Header]) => List[Header],

@@ -22,7 +22,8 @@ package object circe {
       ) deepMerge Json.fromFields(bound.lowerBound.map(x => "minItems" -> Json.fromInt(x)) ++ bound.upperBound.map(x => "maxItems" -> Json.fromInt(x)))
     case Schema.Boolean => Json.obj("type" -> Json.fromString("boolean"))
     case Schema.Enum(choices) => Json.obj("type" -> Json.fromString("string"), "enum" -> Json.arr(choices.map(Json.fromString).toSeq : _*))
-    case Schema.Value(_) => Json.obj("type" -> Json.fromString("string"))
+    case Schema.Value(_, Some(t)) => Json.obj("type" -> Json.fromString("string"), "format" -> Json.fromString(t.format))
+    case Schema.Value(_, None) => Json.obj("type" -> Json.fromString("string"))
     case Schema.Number(_, t) => Json.obj("type" -> Json.fromString("number"), "format" -> Json.fromString(t.format))
     case Schema.Integer(_, t) => Json.obj("type" -> Json.fromString("integer"), "format" -> Json.fromString(t.format))
     case Schema.Ref(id) => Json.obj("$ref" -> Json.fromString(s"#/definitions/$id"))
@@ -105,7 +106,7 @@ package object circe {
   implicit val encoderSwaggerResponse = new Encoder[SwaggerResponse] {
     override def apply(a: SwaggerResponse): Json = Json.obj(
       "schema" -> a.schema.fold(Json.Null)(schemaToJson),
-      "description" -> Json.fromString(a.description),
+      "description" -> a.description.fold(Json.Null)(Json.fromString),
       "example" -> a.example.fold(Json.Null)(Json.fromString)
     )
   }

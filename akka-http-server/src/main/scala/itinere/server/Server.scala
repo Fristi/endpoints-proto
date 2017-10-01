@@ -21,6 +21,6 @@ abstract class Server(implicit val materializer: Materializer, val executionCont
     }
   }
 
-  override def endpoint[A, B](request: Directive1[A], response: (B) => Route): Endpoint[A, B] = Endpoint(request, response)
+  override def endpoint[A, B](request: Directive1[A], response: (B) => Route, description: Option[String] = None): Endpoint[A, B] = Endpoint(request, response)
 }
 

@@ -7,7 +7,7 @@ trait EndpointAlgebra {
   type Response[A]
   type Endpoint[A, B]
 
-  def endpoint[A, B](request: Request[A], response: Response[B]): Endpoint[A, B]
+  def endpoint[A, B](request: Request[A], response: Response[B], description: Option[String] = None): Endpoint[A, B]
 }
 
 trait HttpEndpointAlgebra extends EndpointAlgebra with HttpRequestAlgebra with HttpResponseAlgebra {
@@ -29,8 +29,8 @@ trait UrlAlgebra {
   }
 
   def combineQueryStrings[A, B](first: QueryString[A], second: QueryString[B])(implicit tupler: Tupler[A, B]): QueryString[tupler.Out]
-  def qs[A](name: String)(implicit value: QueryStringParam[A]): QueryString[A]
-  def optQs[A](name: String)(implicit value: QueryStringParam[A]): QueryString[Option[A]]
+  def qs[A](name: String, description: Option[String] = None)(implicit value: QueryStringParam[A]): QueryString[A]
+  def optQs[A](name: String, description: Option[String] = None)(implicit value: QueryStringParam[A]): QueryString[Option[A]]
 
   implicit def stringQueryString: QueryStringParam[String]
   implicit def intQueryString: QueryStringParam[Int]
@@ -109,13 +109,14 @@ trait HttpRequestAlgebra extends UrlAlgebra {
   def PATCH: HttpMethod
 
   implicit def stringRequestHeader: HttpRequestHeaderValue[String]
+  implicit def intRequestHeader: HttpRequestHeaderValue[Int]
 
   implicit class RichHttpRequestHeaders[A](val left: HttpRequestHeaders[A]) {
     def ~[B](right: HttpRequestHeaders[B])(implicit T: Tupler[A, B]): HttpRequestHeaders[T.Out] =
       combineRequestHeaders(left, right)(T)
   }
 
-  def requestHeader[A](name: String)(implicit V: HttpRequestHeaderValue[A]): HttpRequestHeaders[A]
+  def requestHeader[A](name: String, description: Option[String] = None)(implicit V: HttpRequestHeaderValue[A]): HttpRequestHeaders[A]
 
   def combineRequestHeaders[A, B](left: HttpRequestHeaders[A], right: HttpRequestHeaders[B])(implicit T: Tupler[A, B]): HttpRequestHeaders[T.Out]
 
@@ -139,8 +140,8 @@ trait WithJsonCodec {
 }
 
 trait HttpJsonAlgebra { self: HttpRequestAlgebra with HttpResponseAlgebra =>
-  def jsonResponse[A : JsonCodec : JsonSchema]: HttpResponseEntity[A]
-  def jsonRequest[A : JsonCodec : JsonSchema]: HttpRequestEntity[A]
+  def jsonResponse[A : JsonCodec : JsonSchema](description: Option[String] = None): HttpResponseEntity[A]
+  def jsonRequest[A : JsonCodec : JsonSchema](description: Option[String] = None): HttpRequestEntity[A]
 }
 
 trait JsonCodec[A] {

@@ -1,8 +1,11 @@
 package itinere
 
+import java.time.{LocalDate, LocalDateTime}
+
 import shapeless._
 import shapeless.labelled.FieldType
 import enum._
+
 import scala.reflect.ClassTag
 
 sealed trait Schema { self =>
@@ -40,7 +43,17 @@ sealed abstract class NumberType(val format: String)
 object NumberType {
   case object Float extends NumberType("float")
   case object Double extends NumberType("double")
-  case object BigDecimal extends NumberType("big-decimal")
+}
+
+sealed abstract class StringType(val format: String)
+
+object StringType {
+  case object DateTime extends StringType("date-time")
+  case object Email extends StringType("email")
+  case object Hostname extends StringType("hostname")
+  case object IPV4 extends StringType("ipv4")
+  case object IPV6 extends StringType("ipv6")
+  case object Uri extends StringType("uri")
 }
 
 object Schema {
@@ -51,7 +64,7 @@ object Schema {
   final case class Object(fields: List[Field]) extends Schema
   final case class Array(lengthBound: LengthBound, uniqueItems: Boolean, schema: Schema) extends Schema
   final case class Tuple(entries: List[Schema]) extends Schema
-  final case class Value(lengthBound: LengthBound) extends Schema
+  final case class Value(lengthBound: LengthBound, format: Option[StringType]) extends Schema
   final case class Number(bound: Bound, numberType: NumberType) extends Schema
   final case class Integer(bound: Bound, integerType: IntegerType) extends Schema
   case object Boolean extends Schema
@@ -113,9 +126,11 @@ object JsonSchema extends LowerPrioJsonSchema1 {
   implicit val long: JsonSchema[Long] = JsonSchema[Long](Schema.Integer(unbounded, IntegerType.Int64))
   implicit val float: JsonSchema[Float] = JsonSchema[Float](Schema.Number(unbounded, NumberType.Float))
   implicit val double: JsonSchema[Double] = JsonSchema[Double](Schema.Number(unbounded, NumberType.Double))
-  implicit val bigDecimal: JsonSchema[BigDecimal] = JsonSchema[BigDecimal](Schema.Number(unbounded, NumberType.BigDecimal))
+  implicit val bigDecimal: JsonSchema[BigDecimal] = JsonSchema[BigDecimal](Schema.Number(unbounded, NumberType.Double))
   implicit val bool: JsonSchema[Boolean] = JsonSchema[Boolean](Schema.Boolean)
-  implicit val string: JsonSchema[String] = JsonSchema[String](Schema.Value(unboundedLength))
+  implicit val string: JsonSchema[String] = JsonSchema[String](Schema.Value(unboundedLength, None))
+  implicit val localDate: JsonSchema[LocalDate] = JsonSchema[LocalDate](Schema.Value(unboundedLength, Some(StringType.DateTime)))
+  implicit val localDateTime: JsonSchema[LocalDateTime] = JsonSchema[LocalDateTime](Schema.Value(unboundedLength, Some(StringType.DateTime)))
 
   implicit def hconsOption[K <: Symbol, H, T <: HList](implicit key: Witness.Aux[K], H: JsonSchema[H], T: JsonSchema[T]): JsonSchema[FieldType[K, Option[H]] :: T] = new JsonSchema[FieldType[K, Option[H]] :: T] {
     override val schema: Schema =
