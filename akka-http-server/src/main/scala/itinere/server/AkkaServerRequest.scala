@@ -10,7 +10,7 @@ import shapeless._
 import scala.concurrent.ExecutionContext
 import scala.util.Try
 
-trait ServerRequest extends HttpRequestAlgebra with ServerUrl {
+trait AkkaServerRequest extends HttpRequestAlgebra with AkkaServerUrl {
 
   implicit val materializer: Materializer
   implicit val executionContext: ExecutionContext

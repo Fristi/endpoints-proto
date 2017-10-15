@@ -8,8 +8,8 @@ import scala.concurrent.{ExecutionContext, Future}
 
 abstract class AkkaHttpServer(implicit val materializer: Materializer, val executionContext: ExecutionContext)
   extends HttpEndpointAlgebra
-    with ServerResponse
-    with ServerRequest
+    with AkkaServerResponse
+    with AkkaServerRequest
 {
 
   case class Endpoint[A, B](request: Request[A], response: Response[B]) {

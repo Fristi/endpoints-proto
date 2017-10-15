@@ -64,7 +64,6 @@ object AkkaServerApp extends App {
       case r if r.kind.contains("badRequest") => Future.successful(BadRequest(Error("badRequest")))
       case _ => Future.successful(Success(List(User("mark", 223), User("julien", 2323))))
     } ~ addUser.implementedByAsync { req =>
-      println(req)
       Future.successful(Success(req.user))
     }
   }

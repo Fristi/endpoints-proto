@@ -9,7 +9,7 @@ import shapeless.{CNil, HNil}
 
 import scala.util.{Left, Right}
 
-trait ServerResponse extends HttpResponseAlgebra {
+trait AkkaServerResponse extends HttpResponseAlgebra {
   override type HttpResponse[A] = A => Route
   override type HttpResponseEntity[A] = (A, Resp) => Resp
   override type HttpResponseHeaders[A] = (A, Resp) => Resp

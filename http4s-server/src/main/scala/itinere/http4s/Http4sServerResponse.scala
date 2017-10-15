@@ -5,7 +5,7 @@ import itinere.{CoCartesian, HttpResponseAlgebra, InvariantFunctor, Tupler}
 import org.http4s._
 import shapeless.{CNil, HNil}
 
-trait ServerResponse extends HttpResponseAlgebra {
+trait Http4sServerResponse extends HttpResponseAlgebra {
   override type HttpResponseHeaders[A] = A => Headers
   override type HttpResponseEntity[A] = A => Stream[Task, Byte]
   override type HttpResponse[A] = A => Response

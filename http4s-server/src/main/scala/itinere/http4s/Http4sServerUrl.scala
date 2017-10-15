@@ -8,7 +8,7 @@ import shapeless.HNil
 
 import scala.util.Try
 
-trait ServerUrl extends UrlAlgebra {
+trait Http4sServerUrl extends UrlAlgebra {
 
   sealed trait UriDecodeResult[+A] { self =>
 

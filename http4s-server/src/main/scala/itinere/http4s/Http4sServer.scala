@@ -2,13 +2,13 @@ package itinere.http4s
 
 import fs2.{Strategy, Task}
 import itinere.HttpEndpointAlgebra
-import org.http4s.{HttpService, Request => Req, Response => Resp}
 import org.http4s.server.blaze._
+import org.http4s.{HttpService, Request => Req, Response => Resp}
 
 abstract class Http4sServer(implicit val strategy: Strategy)
   extends HttpEndpointAlgebra
-    with ServerResponse
-    with ServerRequest
+    with Http4sServerResponse
+    with Http4sServerRequest
 {
   case class Endpoint[A, B](request: Request[A], response: Response[B]) {
     def implementedByAsync(implementation: A => Task[B]): PartialFunction[Req, Task[Resp]] =

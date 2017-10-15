@@ -6,7 +6,7 @@ import akka.http.scaladsl.unmarshalling.{FromStringUnmarshaller, PredefinedFromS
 import itinere.{InvariantFunctor, Tupler, UrlAlgebra}
 import shapeless.HNil
 
-trait ServerUrl extends UrlAlgebra {
+trait AkkaServerUrl extends UrlAlgebra {
 
   class Path[T](override val directive: Directive1[T]) extends Url[T](directive)
 

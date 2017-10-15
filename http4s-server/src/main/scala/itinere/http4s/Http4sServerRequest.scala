@@ -5,10 +5,11 @@ import itinere.{HttpRequestAlgebra, InvariantFunctor, Tupler}
 import org.http4s.{Request => Req, Headers, Method}
 import org.http4s.util.CaseInsensitiveString
 import shapeless.HNil
+import cats.implicits._
 
 import scala.util.Try
 
-trait ServerRequest extends HttpRequestAlgebra with ServerUrl { self: Http4sServer =>
+trait Http4sServerRequest extends HttpRequestAlgebra with Http4sServerUrl { self: Http4sServer =>
   trait HttpRequestHeaders[A] {
     def decode(headers: Headers): Either[String, A]
   }
@@ -59,7 +60,10 @@ trait ServerRequest extends HttpRequestAlgebra with ServerUrl { self: Http4sServ
 
   override def emptyRequestEntity: HttpRequestEntity[HNil] = new HttpRequestEntity[HNil] {
     override def decode(stream: Stream[Task, Byte]): Task[Either[String, HNil]] =
-      stream.runLog.map(s => if(s.isEmpty) Right(HNil) else Left("Expected empty body, but given"))
+      stream.runLog.map(s =>
+        if(s.isEmpty) Right(HNil)
+        else Left("Expected empty body, but given")
+      )
   }
 
   override def request[A, B, C, AB](
@@ -68,11 +72,12 @@ trait ServerRequest extends HttpRequestAlgebra with ServerUrl { self: Http4sServ
     headers: HttpRequestHeaders[B],
     entity: HttpRequestEntity[C])(implicit T: Tupler.Aux[A, B, AB], TO: Tupler[AB, C]): HttpRequest[TO.Out] =
     Function.unlift[Req, Task[TO.Out]] { req =>
-      if(req.method == method) {
+      if(req.method === method) {
         for {
           a <- url.decode(req.uri).toOption
           b <- headers.decode(req.headers).toOption
-        } yield entity.decode(req.body)
+        } yield entity
+          .decode(req.body)
           .flatMap(_.fold(err => Task.fail(new Throwable(err)), Task.now))
           .map(c => TO.apply(T.apply(a, b), c))
       } else {
@@ -97,7 +102,7 @@ trait ServerRequest extends HttpRequestAlgebra with ServerUrl { self: Http4sServ
   }
   override implicit val httpRequestInvariantFunctor: InvariantFunctor[HttpRequest] = new InvariantFunctor[HttpRequest] {
     override def imap[A, B](fa: HttpRequest[A])(f: (A) => B)(g: (B) => A): HttpRequest[B] = {
-      case r: Req => fa(r).map(f)
+      case r: Req if fa.isDefinedAt(r) => fa(r).map(f)
     }
   }
 }
