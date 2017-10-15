@@ -8,7 +8,7 @@ import itinere.{HttpJsonAlgebra, JsonCodec, JsonSchema, WithJsonCodec}
 import scala.concurrent.Future
 import scala.concurrent.duration._
 
-trait ServerJson extends HttpJsonAlgebra { self: Server with WithJsonCodec =>
+trait AkkaHttpServerJson extends HttpJsonAlgebra { self: AkkaHttpServer with WithJsonCodec =>
 
   override def jsonResponse[A: JsonCodec : JsonSchema](description: Option[String] = None): HttpResponseEntity[A] = (x, resp) =>
     resp.withEntity(ContentTypes.`application/json`, implicitly[JsonCodec[A]].encode(x))

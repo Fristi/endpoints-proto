@@ -8,13 +8,11 @@ trait Transformer[F[_], I, O] {
 }
 
 object Transformer {
-
-
   implicit def alignedCoproduct[F[_], I <: Coproduct, Repr <: Coproduct, O](implicit
                                                                          I: InvariantFunctor[F],
-                                                                            G: Generic.Aux[O, Repr],
-                                                                          TA: Align[Repr, I],
-                                                                            FA: Align[I, Repr]): Transformer[F, I, O] = new Transformer[F, I, O] {
+                                                                         G: Generic.Aux[O, Repr],
+                                                                         TA: Align[Repr, I],
+                                                                         FA: Align[I, Repr]): Transformer[F, I, O] = new Transformer[F, I, O] {
     override def apply(fi: F[I]): F[O] =
       I.imap(fi)(a => G.from(FA(a)))(b => TA(G.to(b)))
   }
@@ -25,7 +23,4 @@ object Transformer {
     override def apply(fi: F[I]): F[O] =
       I.imap(fi)(a => F.from(a))(b => F.to(b))
   }
-
-
-
 }

@@ -147,6 +147,8 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/algebra-build.iml" filepath="$PROJECT_DIR$/.idea/modules/algebra-build.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/example.iml" filepath="$PROJECT_DIR$/.idea/modules/example.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/example-build.iml" filepath="$PROJECT_DIR$/.idea/modules/example-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/http4s.iml" filepath="$PROJECT_DIR$/.idea/modules/http4s.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/http4s-build.iml" filepath="$PROJECT_DIR$/.idea/modules/http4s-build.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/json-argonaut.iml" filepath="$PROJECT_DIR$/.idea/modules/json-argonaut.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/json-argonaut-build.iml" filepath="$PROJECT_DIR$/.idea/modules/json-argonaut-build.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/json-circe.iml" filepath="$PROJECT_DIR$/.idea/modules/json-circe.iml" />
@@ -280,7 +282,7 @@
   </component>
   <component name="ScalaCompilerConfiguration">
     <profile name="SBT 1" modules="itinere,root" />
-    <profile name="SBT 2" modules="docless,nyaya,akka-http-client,akka-http-server,algebra,example,json-argonaut,json-circe,swagger,swagger-circe">
+    <profile name="SBT 2" modules="docless,nyaya,akka-http-client,akka-http-server,algebra,example,http4s,json-argonaut,json-circe,swagger,swagger-circe">
       <option name="implicitConversions" value="true" />
       <option name="higherKinds" value="true" />
       <option name="existentials" value="true" />
@@ -347,6 +349,8 @@
             <option value="$PROJECT_DIR$/algebra/project" />
             <option value="$PROJECT_DIR$/example" />
             <option value="$PROJECT_DIR$/example/project" />
+            <option value="$PROJECT_DIR$/http4s-server" />
+            <option value="$PROJECT_DIR$/http4s-server/project" />
             <option value="$PROJECT_DIR$/json-argonaut" />
             <option value="$PROJECT_DIR$/json-argonaut/project" />
             <option value="$PROJECT_DIR$/json-circe" />
@@ -366,6 +370,33 @@
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
   </component>
   <component name="libraryTable">
+    <library name="SBT: co.fs2:fs2-cats_2.12:0.3.0:jar">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/co.fs2/fs2-cats_2.12/jars/fs2-cats_2.12-0.3.0.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/co.fs2/fs2-cats_2.12/srcs/fs2-cats_2.12-0.3.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="SBT: co.fs2:fs2-core_2.12:0.9.7:jar">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/co.fs2/fs2-core_2.12/jars/fs2-core_2.12-0.9.7.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/co.fs2/fs2-core_2.12/srcs/fs2-core_2.12-0.9.7-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="SBT: co.fs2:fs2-io_2.12:0.9.7:jar">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/co.fs2/fs2-io_2.12/jars/fs2-io_2.12-0.9.7.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/co.fs2/fs2-io_2.12/srcs/fs2-io_2.12-0.9.7-sources.jar!/" />
+      </SOURCES>
+    </library>
     <library name="SBT: com.chuusai:shapeless_2.12:2.3.2:jar">
       <CLASSES>
         <root url="jar://$USER_HOME$/.ivy2/cache/com.chuusai/shapeless_2.12/bundles/shapeless_2.12-2.3.2.jar!/" />
@@ -391,6 +422,15 @@
       <JAVADOC />
       <SOURCES>
         <root url="jar://$USER_HOME$/.ivy2/cache/com.github.mpilquist/simulacrum_2.12/srcs/simulacrum_2.12-0.10.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="SBT: com.twitter:hpack:v1.0.1:jar">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/com.twitter/hpack/jars/hpack-v1.0.1.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/com.twitter/hpack/srcs/hpack-v1.0.1-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="SBT: com.typesafe.akka:akka-actor_2.12:2.4.16:jar">
@@ -510,6 +550,87 @@
         <root url="jar://$USER_HOME$/.ivy2/cache/io.circe/circe-parser_2.12/srcs/circe-parser_2.12-0.8.0-sources.jar!/" />
       </SOURCES>
     </library>
+    <library name="SBT: org.eclipse.jetty.alpn:alpn-api:1.1.2.v20150522:jar">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/org.eclipse.jetty.alpn/alpn-api/jars/alpn-api-1.1.2.v20150522.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/org.eclipse.jetty.alpn/alpn-api/srcs/alpn-api-1.1.2.v20150522-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="SBT: org.http4s:blaze-core_2.12:0.12.8:jar">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/org.http4s/blaze-core_2.12/jars/blaze-core_2.12-0.12.8.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/org.http4s/blaze-core_2.12/srcs/blaze-core_2.12-0.12.8-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="SBT: org.http4s:blaze-http_2.12:0.12.8:jar">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/org.http4s/blaze-http_2.12/jars/blaze-http_2.12-0.12.8.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/org.http4s/blaze-http_2.12/srcs/blaze-http_2.12-0.12.8-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="SBT: org.http4s:http4s-blaze-core_2.12:0.17.2:jar">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/org.http4s/http4s-blaze-core_2.12/jars/http4s-blaze-core_2.12-0.17.2.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/org.http4s/http4s-blaze-core_2.12/srcs/http4s-blaze-core_2.12-0.17.2-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="SBT: org.http4s:http4s-blaze-server_2.12:0.17.2:jar">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/org.http4s/http4s-blaze-server_2.12/jars/http4s-blaze-server_2.12-0.17.2.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/org.http4s/http4s-blaze-server_2.12/srcs/http4s-blaze-server_2.12-0.17.2-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="SBT: org.http4s:http4s-core_2.12:0.17.2:jar">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/org.http4s/http4s-core_2.12/jars/http4s-core_2.12-0.17.2.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/org.http4s/http4s-core_2.12/srcs/http4s-core_2.12-0.17.2-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="SBT: org.http4s:http4s-server_2.12:0.17.2:jar">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/org.http4s/http4s-server_2.12/jars/http4s-server_2.12-0.17.2.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/org.http4s/http4s-server_2.12/srcs/http4s-server_2.12-0.17.2-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="SBT: org.http4s:http4s-websocket_2.12:0.2.0:jar">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/org.http4s/http4s-websocket_2.12/jars/http4s-websocket_2.12-0.2.0.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/org.http4s/http4s-websocket_2.12/srcs/http4s-websocket_2.12-0.2.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="SBT: org.http4s:parboiled_2.12:1.0.0:jar">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/org.http4s/parboiled_2.12/jars/parboiled_2.12-1.0.0.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/org.http4s/parboiled_2.12/srcs/parboiled_2.12-1.0.0-sources.jar!/" />
+      </SOURCES>
+    </library>
     <library name="SBT: org.julienrf:enum-values_2.12:3.1:jar">
       <CLASSES>
         <root url="jar://$USER_HOME$/.ivy2/cache/org.julienrf/enum-values_2.12/jars/enum-values_2.12-3.1.jar!/" />
@@ -526,6 +647,15 @@
       <JAVADOC />
       <SOURCES>
         <root url="jar://$USER_HOME$/.ivy2/cache/org.julienrf/enum_2.12/srcs/enum_2.12-3.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="SBT: org.log4s:log4s_2.12:1.3.6:jar">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/org.log4s/log4s_2.12/jars/log4s_2.12-1.3.6.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/org.log4s/log4s_2.12/srcs/log4s_2.12-1.3.6-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="SBT: org.reactivestreams:reactive-streams:1.0.0:jar">
@@ -553,6 +683,15 @@
       <JAVADOC />
       <SOURCES>
         <root url="jar://$USER_HOME$/.ivy2/cache/org.scala-lang.modules/scala-parser-combinators_2.12/srcs/scala-parser-combinators_2.12-1.0.4-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="SBT: org.scala-lang.modules:scala-xml_2.12:1.0.5:jar">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/org.scala-lang.modules/scala-xml_2.12/bundles/scala-xml_2.12-1.0.5.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/org.scala-lang.modules/scala-xml_2.12/srcs/scala-xml_2.12-1.0.5-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="SBT: org.scala-lang:scala-library:2.10.6:jar" type="Scala">
@@ -598,6 +737,24 @@
       <JAVADOC />
       <SOURCES>
         <root url="jar://$USER_HOME$/.ivy2/cache/org.scala-lang/scala-reflect/srcs/scala-reflect-2.12.3-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="SBT: org.scodec:scodec-bits_2.12:1.1.5:jar">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/org.scodec/scodec-bits_2.12/bundles/scodec-bits_2.12-1.1.5.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/org.scodec/scodec-bits_2.12/srcs/scodec-bits_2.12-1.1.5-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="SBT: org.slf4j:slf4j-api:1.7.25:jar">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/org.slf4j/slf4j-api/jars/slf4j-api-1.7.25.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.ivy2/cache/org.slf4j/slf4j-api/srcs/slf4j-api-1.7.25-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="SBT: org.spire-math:jawn-parser_2.12:0.10.4:jar">

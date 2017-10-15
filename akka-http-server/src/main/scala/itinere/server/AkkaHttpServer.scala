@@ -6,7 +6,7 @@ import itinere.HttpEndpointAlgebra
 
 import scala.concurrent.{ExecutionContext, Future}
 
-abstract class Server(implicit val materializer: Materializer, val executionContext: ExecutionContext)
+abstract class AkkaHttpServer(implicit val materializer: Materializer, val executionContext: ExecutionContext)
   extends HttpEndpointAlgebra
     with ServerResponse
     with ServerRequest

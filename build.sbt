@@ -105,6 +105,15 @@ lazy val `akka-http-server` = project.in(file("akka-http-server"))
     )
   ).dependsOn(algebra)
 
+lazy val http4s = project.in(file("http4s-server"))
+  .settings(commonSettings)
+  .settings(
+    name := "itinere-http4s-server",
+    libraryDependencies ++= Seq(
+      "org.http4s"     %% "http4s-blaze-server" % "0.17.2"
+    )
+  ).dependsOn(algebra)
+
 
 lazy val swagger = project.in(file("swagger"))
   .settings(commonSettings)
@@ -128,7 +137,7 @@ lazy val example = project.in(file("example"))
   .settings(commonSettings)
   .settings(libraryDependencies += "io.circe" %% "circe-generic" % "0.8.0")
   .settings(libraryDependencies += "org.webjars" % "swagger-ui" % "3.0.18")
-  .dependsOn(`json-circe`, `akka-http-client`, `akka-http-server`, `swagger-circe`)
+  .dependsOn(`json-circe`, `akka-http-client`, `akka-http-server`, `swagger-circe`, http4s)
 
 lazy val root = (project in file("."))
   .aggregate(algebra, `json-argonaut`, `json-circe`, `akka-http-client`, `akka-http-server`, swagger, `swagger-circe`)
